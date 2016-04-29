@@ -16,7 +16,7 @@ namespace AlgDat01 {
         public abstract bool Search(int elem);
         public bool Insert(int elem) {
             if (!Search(elem)) {
-                return executeInsert(elem);
+                return ExecuteInsert(elem);
             }
             else {
                 return false;
@@ -24,7 +24,7 @@ namespace AlgDat01 {
         }
         public bool Delete(int elem) {
             if (Search(elem)) {
-                return executeDelete(elem);
+                return ExecuteDelete(elem);
             }
             else {
                 return false;
@@ -32,27 +32,20 @@ namespace AlgDat01 {
         }
         public abstract void Print();
 
-        public abstract bool executeInsert(int elem);
-        public abstract bool executeDelete(int elem);
+        public abstract bool ExecuteInsert(int elem);
+        public abstract bool ExecuteDelete(int elem);
     }
 
     abstract class SortedSet : Set {
-
+        public abstract void ExecuteSort();
     }
 
     abstract class MultiSet : Dictionary {
         public abstract bool Search(int elem);
-        public bool Insert(int elem) {
-            if (!Search(elem)) {
-                return executeInsert(elem);
-            }
-            else {
-                return false;
-            }
-        }
+        public abstract bool Insert(int elem);
         public bool Delete(int elem) {
             if (Search(elem)) {
-                return executeDelete(elem);
+                return ExecuteDelete(elem);
             }
             else {
                 return false;
@@ -60,8 +53,8 @@ namespace AlgDat01 {
         }
         public abstract void Print();
 
-        public abstract bool executeInsert(int elem);
-        public abstract bool executeDelete(int elem);
+        public abstract bool ExecuteInsert(int elem);
+        public abstract bool ExecuteDelete(int elem);
     }
 
     abstract class SortedMultiset : MultiSet {
