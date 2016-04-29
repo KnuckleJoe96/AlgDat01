@@ -53,7 +53,6 @@ namespace AlgDat01 {
         }
         public abstract void Print();
 
-        public abstract bool ExecuteInsert(int elem);
         public abstract bool ExecuteDelete(int elem);
     }
 
