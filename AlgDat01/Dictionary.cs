@@ -37,7 +37,7 @@ namespace AlgDat01 {
     }
 
     abstract class SortedSet : Set {
-        public abstract void ExecuteSort();
+        //public abstract void ExecuteSort();
     }
 
     abstract class MultiSet : Dictionary {
