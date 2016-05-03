@@ -1,5 +1,0 @@
-C:\Users\Lukas\Desktop\AuD Semester 4\AlgDat01\AlgDat01\bin\Debug\AlgDat01.dll
-C:\Users\Lukas\Desktop\AuD Semester 4\AlgDat01\AlgDat01\bin\Debug\AlgDat01.pdb
-C:\Users\Lukas\Desktop\AuD Semester 4\AlgDat01\AlgDat01\obj\Debug\AlgDat01.csprojResolveAssemblyReference.cache
-C:\Users\Lukas\Desktop\AuD Semester 4\AlgDat01\AlgDat01\obj\Debug\AlgDat01.dll
-C:\Users\Lukas\Desktop\AuD Semester 4\AlgDat01\AlgDat01\obj\Debug\AlgDat01.pdb

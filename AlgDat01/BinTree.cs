@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgDat01 {
-    class BinTree : SortedSet {
+    public class BinTree : SortedSet {
         Elem root;
         int counter = 0;
 

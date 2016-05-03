@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgDat01 {
-    interface Dictionary {
+    public interface Dictionary {
         bool Search(int elem); //true = gefunden
         bool Insert(int elem); //true = hinzugefügt
         bool Delete(int elem); //true = gelöscht
@@ -58,19 +58,19 @@ namespace AlgDat01 {
   }
   */
 
-    interface Set : Dictionary {
+    public interface Set : Dictionary {
 
     }
 
-    interface SortedSet : Set {
+    public interface SortedSet : Set {
 
     }
 
-    interface MultiSet : Dictionary {
+    public interface MultiSet : Dictionary {
 
     }
 
-    interface SortedMultiSet : MultiSet {
+    public interface SortedMultiSet : MultiSet {
 
     }
 }
