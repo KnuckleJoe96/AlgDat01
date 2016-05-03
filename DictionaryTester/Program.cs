@@ -36,8 +36,8 @@ namespace DictionaryTester
             //BasicTest(new AVLTree());
             //FuzzyTest(new AVLTree());
 
-            //BasicTest(new HashTabSepChain());
-            //FuzzyTest(new HashTabSepChain());
+            BasicTest(new HashTabSepChain());
+            FuzzyTest(new HashTabSepChain());
             //BasicTest(new HashTabQuadProb());
             //FuzzyTest(new HashTabQuadProb());
 
