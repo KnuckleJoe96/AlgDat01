@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgDat01 {
-    class Array {
+    abstract class Array : Dictionary {
         int[] array;
 
         public Array(int size, int startValue) {
@@ -20,83 +20,88 @@ namespace AlgDat01 {
         public Array() {
             array = new int[100];
         }
+
+        public abstract bool Search(int elem);
+        public abstract bool Insert(int elem);
+        public abstract bool Delete(int elem);
+        public abstract void Print();
     }
     //===============================================================================================================
 
-    class SetUnsortedArray : Set {
-        public bool Delete(int elem) {
+    class SetUnsortedArray : Array, Set {
+        public override bool Delete(int elem) {
             throw new NotImplementedException();
         }
 
-        public bool Insert(int elem) {
+        public override bool Insert(int elem) {
             throw new NotImplementedException();
         }
 
-        public void Print() {
+        public override void Print() {
             throw new NotImplementedException();
         }
 
-        public bool Search(int elem) {
-            throw new NotImplementedException();
-        }
-    }
-
-    //===============================================================================================================
-
-    class SetSortedArray : SortedSet {
-        public bool Delete(int elem) {
-            throw new NotImplementedException();
-        }
-
-        public bool Insert(int elem) {
-            throw new NotImplementedException();
-        }
-
-        public void Print() {
-            throw new NotImplementedException();
-        }
-
-        public bool Search(int elem) {
+        public override bool Search(int elem) {
             throw new NotImplementedException();
         }
     }
 
     //===============================================================================================================
 
-    class MultiSetUnsortedArray : MultiSet {
-        public bool Delete(int elem) {
+    class SetSortedArray : Array, SortedSet {
+        public override bool Delete(int elem) {
             throw new NotImplementedException();
         }
 
-        public bool Insert(int elem) {
+        public override bool Insert(int elem) {
             throw new NotImplementedException();
         }
 
-        public void Print() {
+        public override void Print() {
             throw new NotImplementedException();
         }
 
-        public bool Search(int elem) {
+        public override bool Search(int elem) {
             throw new NotImplementedException();
         }
     }
 
     //===============================================================================================================
 
-    class MultiSetArray : MultiSet {
-        public bool Delete(int elem) {
+    class MultiSetUnsortedArray : Array, MultiSet {
+        public override bool Delete(int elem) {
             throw new NotImplementedException();
         }
 
-        public bool Insert(int elem) {
+        public override bool Insert(int elem) {
             throw new NotImplementedException();
         }
 
-        public void Print() {
+        public override void Print() {
             throw new NotImplementedException();
         }
 
-        public bool Search(int elem) {
+        public override bool Search(int elem) {
+            throw new NotImplementedException();
+        }
+    }
+
+    //===============================================================================================================
+
+    class MultiSetArray : Array, SortedMultiSet {
+        public override bool Delete(int elem) {
+            throw new NotImplementedException();
+        }
+
+        public override bool Insert(int elem) {
+            throw new NotImplementedException();
+        }
+
+        public override void Print() {
+            throw new NotImplementedException();
+        }
+
+        public override bool Search(int elem) {
             throw new NotImplementedException();
         }
     }

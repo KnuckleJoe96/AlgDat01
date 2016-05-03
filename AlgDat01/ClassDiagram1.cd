@@ -1,61 +1,132 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AlgDat01.Array" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Array.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgDat01.SetUnsortedArray" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Array.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgDat01.SetSortedArray" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Array.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.21" />
+  </Class>
+  <Class Name="AlgDat01.MultiSetUnsortedArray" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Array.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgDat01.MultiSetArray" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Array.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Class Name="AlgDat01.AVLTree" Collapsed="true">
-    <Position X="0.5" Y="5.5" Width="1.5" />
+    <Position X="5.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AVLTree.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AlgDat01.BinTree">
-    <Position X="0.5" Y="1" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Class Name="AlgDat01.BinTree.Elem" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>BinTree.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
+  <Class Name="AlgDat01.BinTree" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEACACAAAAAAABAgAAAAAAEAAAEAAAAAAAAkAAA=</HashCode>
       <FileName>BinTree.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AlgDat01.Array">
-    <Position X="7.5" Y="2" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
+  <Class Name="AlgDat01.List" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Array.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AlgDat01.List">
-    <Position X="3" Y="2" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Class Name="AlgDat01.List.LElem" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>List.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>AAAAAEACAAAAAAAgAAAAAgAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <HashCode>AAAAAEACAAAAAAAgAAAAAiAAAAEAAAAAAAAEAAAkAAA=</HashCode>
       <FileName>List.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="AlgDat01.Dictionary">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+  <Class Name="AlgDat01.SetSortedLinkedList" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>List.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgDat01.SetUnsortedLinkedList" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>List.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgDat01.MultiSetSortedLinkedList" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>List.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgDat01.MultiSetUnsortedLinkedList" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>List.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AlgDat01.Dictionary" Collapsed="true">
+    <Position X="1.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Dictionary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgDat01.Set" Collapsed="true">
+    <Position X="2.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dictionary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgDat01.SortedSet" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dictionary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgDat01.MultiSet" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dictionary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgDat01.SortedMultiSet" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Dictionary.cs</FileName>
     </TypeIdentifier>
   </Interface>

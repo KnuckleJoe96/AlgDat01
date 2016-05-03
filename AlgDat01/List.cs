@@ -26,8 +26,10 @@ namespace AlgDat01 {
         }
 
         public bool Search(int elem) {
-            if (ReturnSearch(elem) != null)
+            if (ReturnSearch(elem) != null) {
+                Console.WriteLine("Item found!");
                 return true;
+            }
             return false;
         }
         public abstract bool Insert(int elem);
@@ -36,7 +38,10 @@ namespace AlgDat01 {
                 LElem item = ReturnSearch(elem);
 
                 //1. Case: leere Liste
-                if (item == null) return false;
+                if (item == null) {
+                    Console.WriteLine("Delete failed.");
+                    return false;
+                }
 
                 //2. Case: Item in der Mitte
                 if (item != start && item != end) {
@@ -45,6 +50,7 @@ namespace AlgDat01 {
                     item.prev = null;
                     item.next = null;
 
+                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
@@ -53,6 +59,7 @@ namespace AlgDat01 {
                     start = null;
                     end = null;
 
+                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
@@ -62,6 +69,7 @@ namespace AlgDat01 {
                     start.prev.next = null;
                     start.prev = null;
 
+                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
@@ -71,10 +79,13 @@ namespace AlgDat01 {
                     end.next.prev = null;
                     end.next = null;
 
+                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
             }
+
+            Console.WriteLine("Delete failed.");
             return false;
         }
         public void Print() {
@@ -153,10 +164,12 @@ namespace AlgDat01 {
                 LElem newElem = new LElem(elem);
 
                 if(temp.value != newElem.value) {
+                    Console.WriteLine("Insert successful.");
                     return InsertHelper(temp, newElem);
                 }               
             }
 
+            Console.WriteLine("Insert failed.");
             return false;
         }
     }
@@ -165,18 +178,20 @@ namespace AlgDat01 {
 
     public class SetUnsortedLinkedList : List, Set {
         public override bool Insert(int elem) {
-            if (!Search(elem)) {
-                if (start != null) {
+            if (start != null) {
+
+                if (ReturnSearch(elem) == null) {
                     LElem newElem = new LElem(elem);
 
                     end.next = newElem;
                     newElem.prev = end;
                     end = newElem;
                 }
-
+                Console.WriteLine("Insert successful.");
                 return true;
             }
 
+            Console.WriteLine("Insert failed.");
             return false;
         }
     }
@@ -189,9 +204,11 @@ namespace AlgDat01 {
                 LElem temp = PositionFinder(elem);
                 LElem newElem = new LElem(elem);
 
+                Console.WriteLine("Insert successful.");
                 return InsertHelper(temp, newElem);
             }
 
+            Console.WriteLine("Insert failed.");
             return false;
         }
     }
@@ -209,6 +226,7 @@ namespace AlgDat01 {
                 end = newElem;
             }
 
+            Console.WriteLine("Insert successful.");
             return true;
         }
     }
