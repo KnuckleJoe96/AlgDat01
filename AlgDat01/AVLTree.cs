@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgDat01 {
-    class AVLTree {
+    class AVLTree : BinTree {
     }
 }

@@ -7,32 +7,46 @@ using System.Threading.Tasks;
 namespace AlgDat01 {
   class BinTree : SortedSet {
     Elem root;
-    int counter = 1;
+    int counter = 0;
+
+    public BinTree(int Root) {
+      root = new Elem(Root);
+    }
+
+    public BinTree() {}
 
     public override bool ExecuteInsert(int Value) {
-      Elem newElem = new Elem() { value = Value };
-      Elem temp = root;
-      counter++;
-      bool found = false;
-      while (found == false) {
-        if (Value < temp.value) {
-          if (temp.left != null)
-            temp = temp.left;
+      if (root != null) {
+        Elem newElem = new Elem(Value);
+        Elem temp = root;
+        counter++;
+        bool found = false;
+
+        while (found == false) {
+          if (Value < temp.value) {
+            if (temp.left != null)
+              temp = temp.left;
+            else {
+              temp.left = newElem;
+              found = true;
+            }
+          }
           else {
-            temp.left = newElem;
-            found = true;
+            if (temp.right != null)
+              temp = temp.right;
+            else {
+              temp.right = newElem;
+              found = true;
+            }
           }
         }
-        else {
-          if (temp.right != null)
-            temp = temp.right;
-          else {
-            temp.right = newElem;
-            found = true;
-          }
-        }
+        return true;
       }
-      return true;
+      else {
+        root = new Elem(Value);
+        counter++;
+        return true;
+      }
     }
 
     public override bool Search(int Value) {
@@ -63,71 +77,76 @@ namespace AlgDat01 {
     }
 
     public override bool ExecuteDelete(int Value) {
-      if (Search(Value) == true) {
-        Elem father = root;
-        Elem temp = root;
-        if (temp.value == Value) {
+      if (root != null) {
+        if (Search(Value) == true) {
+          Elem father = root;
+          Elem temp = root;
+          if (temp.value == Value) {
 
-          if (father.left == temp) {
-            if (checkForSuccessors(temp) == 0) {
-              father.left = null;
+            if (father.left == temp) {
+              if (checkForSuccessors(temp) == 0) {
+                father.left = null;
+              }
+              if (checkForSuccessors(temp) == 1) {
+                if (temp.left != null)
+                  father.left = temp.left;
+                else
+                  father.left = temp.right;
+              }
+              if (checkForSuccessors(temp) == 2) {
+                father.left = findSymmetricalSuccessor(temp);
+                father.left.right = temp.right;
+                father.left.left = temp.left;
+                Delete(father.left.value);
+              }
             }
-            if (checkForSuccessors(temp) == 1) {
-              if (temp.left != null)
-                father.left = temp.left;
+            if (father.right == temp) {
+              if (checkForSuccessors(temp) == 0) {
+                father.right = null;
+              }
+              if (checkForSuccessors(temp) == 1) {
+                if (temp.right != null)
+                  father.right = temp.left;
+                else
+                  father.right = temp.right;
+              }
+              if (checkForSuccessors(temp) == 2) {
+                father.right = findSymmetricalSuccessor(temp);
+                father.right.right = temp.right;
+                father.right.left = temp.left;
+                Delete(father.right.value);
+              }
+            }
+
+          }
+          bool found = false;
+
+          while (found == false) {
+            if (Value == temp.value)
+              return true;
+            if (Value < temp.value) {
+              if (temp.left != null) {
+                father = temp;
+                temp = temp.left;
+              }
               else
-                father.left = temp.right;
+                return false;
             }
-            if (checkForSuccessors(temp) == 2) {
-              father.left = findSymmetricalSuccessor(temp);
-              father.left.right = temp.right;
-              father.left.left = temp.left;
-              Delete(father.left.value);
-            }
-          }
-          if (father.right == temp) {
-            if (checkForSuccessors(temp) == 0) {
-              father.right = null;
-            }
-            if (checkForSuccessors(temp) == 1) {
-              if (temp.right != null)
-                father.right = temp.left;
+            else {
+              if (temp.right != null) {
+                father = temp;
+                temp = temp.right;
+              }
               else
-                father.right = temp.right;
-            }
-            if (checkForSuccessors(temp) == 2) {
-              father.right = findSymmetricalSuccessor(temp);
-              father.right.right = temp.right;
-              father.right.left = temp.left;
-              Delete(father.right.value);
+                return false;
             }
           }
-
+          father = temp.left;
+          return false;
         }
-        bool found = false;
-
-        while (found == false) {
-          if (Value == temp.value)
-            return true;
-          if (Value < temp.value) {
-            if (temp.left != null) {
-              father = temp;
-              temp = temp.left;
-            }
-            else
-              return false;
-          }
-          else {
-            if (temp.right != null) {
-              father = temp;
-              temp = temp.right;
-            }
-            else
-              return false;
-          }
+        else {
+          return false;
         }
-        father = temp.left;
-        return false;
       }
       else {
         return false;
@@ -135,7 +154,8 @@ namespace AlgDat01 {
     }
 
     public override void Print() {
-      InOrder(root);
+      if(root != null)
+        InOrder(root);
     }
 
     void InOrder(Elem temp) {
@@ -169,6 +189,10 @@ namespace AlgDat01 {
       public int value;
       public Elem right;
       public Elem left;
+
+      public Elem(int Value) {
+        value = Value;
+      }
     }
   }
 }
