@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="AlgDat01.AVLTree" Collapsed="true">
-    <Position X="0.5" Y="8.75" Width="1.5" />
+    <Position X="0.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AVLTree.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlgDat01.BinTree">
-    <Position X="0.5" Y="4" Width="1.5" />
+    <Position X="0.5" Y="1" Width="1.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -20,66 +20,27 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAACACAAAAAAABAgAAAAAAAAAAEQAAgAAAAkAAA=</HashCode>
+      <HashCode>AAAAAEACACAAAAAAABAgAAAAAAEAAAEAAAAAAAAkAAA=</HashCode>
       <FileName>BinTree.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AlgDat01.Set">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+  <Class Name="AlgDat01.Array">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAQAAgAAAAkAAA=</HashCode>
-      <FileName>Dictionary.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Orientation="Right" Position="0.1" />
-  </Class>
-  <Class Name="AlgDat01.SortedSet">
-    <Position X="0.5" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Dictionary.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AlgDat01.MultiSet">
-    <Position X="10" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAkAAA=</HashCode>
-      <FileName>Dictionary.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.1" />
-  </Class>
-  <Class Name="AlgDat01.SortedMultiset">
-    <Position X="10" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Dictionary.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Array.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlgDat01.List">
-    <Position X="4" Y="2.75" Width="1.5" />
+    <Position X="3" Y="2" Width="1.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
-      <Class Name="AlgDat01.List.SetSortedLinkedList" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>List.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="AlgDat01.List.SetUnsortedLinkedList" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>List.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="AlgDat01.List.MultiSetSortedLinkedList" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>List.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="AlgDat01.List.MultiSetUnsortedLinkedList" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>List.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
       <Class Name="AlgDat01.List.LElem" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>List.cs</NewMemberFileName>
@@ -87,40 +48,8 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAEACAAAAAAAgAAAAAgAAAAEAAAAAAAAAAAAkAAA=</HashCode>
       <FileName>List.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AlgDat01.Array">
-    <Position X="6.5" Y="2.75" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Class Name="AlgDat01.Array.SetUnsortedArray" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Array.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="AlgDat01.Array.SetSortedArray" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Array.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="AlgDat01.Array.MultiSetUnsortedArray" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Array.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="AlgDat01.Array.MultiSetArray" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Array.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Array.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="AlgDat01.Dictionary">

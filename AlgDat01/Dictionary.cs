@@ -12,51 +12,65 @@ namespace AlgDat01 {
         void Print(); //Ausgabe der Elemente
     }
 
-    abstract class Set : Dictionary {
-        public abstract bool Search(int elem);
-        public bool Insert(int elem) {
-            if (!Search(elem)) {
-                return ExecuteInsert(elem);
-            }
-            else {
-                return false;
-            }
-        }
-        public bool Delete(int elem) {
-            if (Search(elem)) {
-                return ExecuteDelete(elem);
-            }
-            else {
-                return false;
-            }
-        }
-        public abstract void Print();
+    /* public abstract class Set : Dictionary {
+         public abstract bool Search(int elem);
+         public bool Insert(int elem) {
+             if (!Search(elem)) {
+                 return ExecuteInsert(elem);
+             }
+             else {
+                 return false;
+             }
+         }
+         public bool Delete(int elem) {
+             if (Search(elem)) {
+                 return ExecuteDelete(elem);
+             }
+             else {
+                 return false;
+             }
+         }
+         public abstract void Print();
 
-        public abstract bool ExecuteInsert(int elem);
-        public abstract bool ExecuteDelete(int elem);
+         public abstract bool ExecuteInsert(int elem);
+         public abstract bool ExecuteDelete(int elem);
+     }
+
+     public abstract class SortedSet : Set {}
+
+     public abstract class MultiSet : Dictionary {
+         public abstract bool Search(int elem);
+         public abstract bool Insert(int elem);
+         public bool Delete(int elem) {
+             if (Search(elem)) {
+                 return ExecuteDelete(elem);
+             }
+             else {
+                 return false;
+             }
+         }
+         public abstract void Print();
+
+         public abstract bool ExecuteDelete(int elem);
+     }
+
+     public abstract class SortedMultiset : MultiSet {}
+  }
+  */
+
+    interface Set : Dictionary {
+
     }
 
-    abstract class SortedSet : Set {
-        //public abstract void ExecuteSort();
+    interface SortedSet : Set {
+
     }
 
-    abstract class MultiSet : Dictionary {
-        public abstract bool Search(int elem);
-        public abstract bool Insert(int elem);
-        public bool Delete(int elem) {
-            if (Search(elem)) {
-                return ExecuteDelete(elem);
-            }
-            else {
-                return false;
-            }
-        }
-        public abstract void Print();
+    interface MultiSet : Dictionary {
 
-        public abstract bool ExecuteDelete(int elem);
     }
 
-    abstract class SortedMultiset : MultiSet {
+    interface SortedMultiSet : MultiSet {
 
     }
 }
