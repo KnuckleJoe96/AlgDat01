@@ -13,14 +13,14 @@ namespace DictionaryTester
 
         public static void Main(string[] args)
         {
-            //BasicTest(new SetSortedArray());
-            //FuzzyTest(new SetSortedArray());
-            //BasicTest(new SetUnsortedArray());
-            //FuzzyTest(new SetUnsortedArray());
-            //BasicTest(new MultiSetArray());
-            //FuzzyTest(new MultiSetArray());
-            //BasicTest(new MultiSetUnsortedArray());
-            //FuzzyTest(new MultiSetUnsortedArray());
+            BasicTest(new SetSortedArray());
+            FuzzyTest(new SetSortedArray());
+            BasicTest(new SetUnsortedArray());
+            FuzzyTest(new SetUnsortedArray());
+            BasicTest(new MultiSetArray());
+            FuzzyTest(new MultiSetArray());
+            BasicTest(new MultiSetUnsortedArray());
+            FuzzyTest(new MultiSetUnsortedArray());
 
             BasicTest(new SetSortedLinkedList());
             FuzzyTest(new SetSortedLinkedList());
@@ -49,7 +49,6 @@ namespace DictionaryTester
         public static void PrintTestHeader(Dictionary dict)
         {
             Console.WriteLine("----- Testing {0} -----", dict.GetType().Name);
-            Console.ReadKey();
         }
 
         public delegate bool DictionaryOperation(int element);
@@ -78,7 +77,7 @@ namespace DictionaryTester
 
             var rng = new Random();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 100000; i++)
             {
                 var operation = operations[rng.Next(operations.Length)];
                 int element = rng.Next(1000);
