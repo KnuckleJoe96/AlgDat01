@@ -4,6 +4,26 @@ using System.Linq;
 using System.Text;
 
 namespace AlgDat01 {
+    public class LinkedList {
+        public LElem start;
+        public LElem end;
+
+        public LinkedList(int Value) {
+            start = new LElem(Value);
+            end = start;
+        }
+
+        public class LElem {
+            public int value;
+            public LElem next;
+            public LElem prev;
+
+            public LElem(int Value) {
+                value = Value;
+            }
+        }
+    }
+
     public abstract class List : Dictionary {
         public LElem start;
         public LElem end;
@@ -15,7 +35,7 @@ namespace AlgDat01 {
 
         public List() { }
 
-        public class LElem { //eigentilch private??
+        public class LElem {
             public int value;
             public LElem next;
             public LElem prev;
@@ -30,6 +50,8 @@ namespace AlgDat01 {
                 Console.WriteLine("Item found!");
                 return true;
             }
+
+            Console.WriteLine("Item not found!");
             return false;
         }
         public abstract bool Insert(int elem);
@@ -89,7 +111,7 @@ namespace AlgDat01 {
             return false;
         }
         public void Print() {
-            Console.WriteLine("Print: ");
+            Console.WriteLine("\nPrint: ");
 
             if (start != null) {
                 LElem temp = start;
@@ -103,6 +125,7 @@ namespace AlgDat01 {
             else {
                 Console.WriteLine("Not successful!");
             }
+            Console.WriteLine("\n");
         }
 
         public LElem ReturnSearch(int elem) {
@@ -123,7 +146,7 @@ namespace AlgDat01 {
         public LElem PositionFinder(int elem) {
             LElem temp = start;
 
-            while (temp.value <= elem && temp != null) {
+            while (temp != null && temp.value < elem) {
                 temp = temp.next;
             }
 
@@ -131,42 +154,58 @@ namespace AlgDat01 {
         }
 
         public bool InsertHelper(LElem temp, LElem newElem) {
-            if (temp != null) {
-                if (temp != start && temp != null) {
-                    temp.prev.next = newElem;
-                    newElem.next = temp;
-                    newElem.prev = temp.prev;
-                    temp.prev = newElem;
-                }
 
-                if (temp == null) {
-                    end.next = newElem;
-                    newElem.prev = end;
-                    end = end.next;
-                }
-
-                if (temp == start) {
-                    start.prev = newElem;
-                    newElem.next = start;
-                    start = start.prev;
-                }
+            if (temp != start && temp != null) {
+                temp.prev.next = newElem;
+                newElem.next = temp;
+                newElem.prev = temp.prev;
+                temp.prev = newElem;
 
                 return true;
             }
+
+            if (temp == null) {
+                end.next = newElem;
+                newElem.prev = end;
+                end = end.next;
+
+                return true;
+            }
+
+            if (temp == start) {
+                start.prev = newElem;
+                newElem.next = start;
+                start = start.prev;
+
+                return true;
+            }
+
             return false;
         }
     }
 
-    public class SetSortedLinkedList : List, SortedSet {
+    public class SetSortedLinkedList : SetUnsortedLinkedList, SortedSet {
         public override bool Insert(int elem) {
-            if (start != null) {
-                LElem temp = PositionFinder(elem);
-                LElem newElem = new LElem(elem);
+            LElem temp = PositionFinder(elem);
+            LElem newElem = new LElem(elem);
 
-                if(temp.value != newElem.value) {
+            if (start != null) {
+                if (temp != null) {
+                    if (temp.value != newElem.value) {
+                        Console.WriteLine("Insert successful.");
+                        return InsertHelper(temp, newElem);
+                    }
+                }
+                else {
                     Console.WriteLine("Insert successful.");
                     return InsertHelper(temp, newElem);
-                }               
+                }
+            }
+            else {
+                start = new LElem(elem);
+                end = start;
+                Console.WriteLine("Insert successful (new List).");
+                return true;
             }
 
             Console.WriteLine("Insert failed.");
@@ -186,19 +225,26 @@ namespace AlgDat01 {
                     end.next = newElem;
                     newElem.prev = end;
                     end = newElem;
-                }
-                Console.WriteLine("Insert successful.");
+
+                    Console.WriteLine("Insert successful.");
+                    return true;
+                }                
+            }
+            else {
+                start = new LElem(elem);
+                end = start;
+                Console.WriteLine("Insert successful (new List).");
                 return true;
             }
 
             Console.WriteLine("Insert failed.");
-            return false;
+            return false;//-----------------
         }
     }
 
     //===============================================================================================================
 
-    public class MultiSetSortedLinkedList : List, SortedMultiSet {
+    public class MultiSetSortedLinkedList : MultiSetUnsortedLinkedList, SortedMultiSet {
         public override bool Insert(int elem) {
             if (start != null) {
                 LElem temp = PositionFinder(elem);
@@ -207,9 +253,12 @@ namespace AlgDat01 {
                 Console.WriteLine("Insert successful.");
                 return InsertHelper(temp, newElem);
             }
-
-            Console.WriteLine("Insert failed.");
-            return false;
+            else {
+                start = new LElem(elem);
+                end = start;
+                Console.WriteLine("Insert successful (new List).");
+                return true;
+            }
         }
     }
 
@@ -224,10 +273,17 @@ namespace AlgDat01 {
                 end.next = newElem;
                 newElem.prev = end;
                 end = newElem;
-            }
 
-            Console.WriteLine("Insert successful.");
-            return true;
+                Console.WriteLine("Insert successful.");
+                return true;
+            }
+            else {
+                start = new LElem(elem);
+                end = start;
+
+                Console.WriteLine("Insert successful (new List).");
+                return true;
+            }            
         }
     }
 }

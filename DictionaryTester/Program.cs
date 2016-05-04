@@ -13,33 +13,33 @@ namespace DictionaryTester
 
         public static void Main(string[] args)
         {
-            BasicTest(new SetSortedArray());
+           /* BasicTest(new SetSortedArray());
             FuzzyTest(new SetSortedArray());
             BasicTest(new SetUnsortedArray());
             FuzzyTest(new SetUnsortedArray());
             BasicTest(new MultiSetArray());
             FuzzyTest(new MultiSetArray());
             BasicTest(new MultiSetUnsortedArray());
-            FuzzyTest(new MultiSetUnsortedArray());
+            FuzzyTest(new MultiSetUnsortedArray());*/
 
             BasicTest(new SetSortedLinkedList());
-            FuzzyTest(new SetSortedLinkedList());
+            //FuzzyTest(new SetSortedLinkedList());
             BasicTest(new SetUnsortedLinkedList());
-            FuzzyTest(new SetUnsortedLinkedList());
+            //FuzzyTest(new SetUnsortedLinkedList());
             BasicTest(new MultiSetSortedLinkedList());
-            FuzzyTest(new MultiSetSortedLinkedList());
+            //FuzzyTest(new MultiSetSortedLinkedList());
             BasicTest(new MultiSetUnsortedLinkedList());
-            FuzzyTest(new MultiSetUnsortedLinkedList());
+            //FuzzyTest(new MultiSetUnsortedLinkedList());
 
-            BasicTest(new BinTree());
+            /*BasicTest(new BinTree());
             FuzzyTest(new BinTree());
-            //BasicTest(new AVLTree());
-            //FuzzyTest(new AVLTree());
+            BasicTest(new AVLTree());
+            FuzzyTest(new AVLTree());
 
             BasicTest(new HashTabSepChain());
             FuzzyTest(new HashTabSepChain());
-            //BasicTest(new HashTabQuadProb());
-            //FuzzyTest(new HashTabQuadProb());
+            BasicTest(new HashTabQuadProb());
+            FuzzyTest(new HashTabQuadProb());*/
 
             Console.WriteLine("----------------");
             Console.WriteLine("{0} from {1} tests failed", failedTestCount, testCount);
@@ -77,7 +77,7 @@ namespace DictionaryTester
 
             var rng = new Random();
 
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var operation = operations[rng.Next(operations.Length)];
                 int element = rng.Next(1000);
