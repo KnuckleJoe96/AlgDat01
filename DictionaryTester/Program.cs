@@ -6,6 +6,9 @@ using AlgDat01;
 
 namespace DictionaryTester
 {
+    //
+    //SAMUEL, hier bitte Skype-Name eintragen: 
+    //
     class Tester
     {
         static int testCount = 0;
@@ -13,7 +16,7 @@ namespace DictionaryTester
 
         public static void Main(string[] args)
         {
-           /* BasicTest(new SetSortedArray());
+            /*BasicTest(new SetSortedArray());
             FuzzyTest(new SetSortedArray());
             BasicTest(new SetUnsortedArray());
             FuzzyTest(new SetUnsortedArray());
@@ -22,18 +25,18 @@ namespace DictionaryTester
             BasicTest(new MultiSetUnsortedArray());
             FuzzyTest(new MultiSetUnsortedArray());*/
 
-            BasicTest(new SetSortedLinkedList());
+            //BasicTest(new SetSortedLinkedList());
             //FuzzyTest(new SetSortedLinkedList());
-            BasicTest(new SetUnsortedLinkedList());
+            //BasicTest(new SetUnsortedLinkedList());
             //FuzzyTest(new SetUnsortedLinkedList());
-            BasicTest(new MultiSetSortedLinkedList());
+            //BasicTest(new MultiSetSortedLinkedList());
             //FuzzyTest(new MultiSetSortedLinkedList());
-            BasicTest(new MultiSetUnsortedLinkedList());
+            //BasicTest(new MultiSetUnsortedLinkedList());
             //FuzzyTest(new MultiSetUnsortedLinkedList());
 
-            /*BasicTest(new BinTree());
-            FuzzyTest(new BinTree());
-            BasicTest(new AVLTree());
+            BasicTest(new BinTree());
+            //FuzzyTest(new BinTree());
+            /*BasicTest(new AVLTree());
             FuzzyTest(new AVLTree());
 
             BasicTest(new HashTabSepChain());
@@ -77,7 +80,7 @@ namespace DictionaryTester
 
             var rng = new Random();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 100000; i++)
             {
                 var operation = operations[rng.Next(operations.Length)];
                 int element = rng.Next(1000);
@@ -202,17 +205,25 @@ namespace DictionaryTester
             TestOperation(dict.Insert, 5, true);
             TestOperation(dict.Insert, 8, true);
             TestOperation(dict.Insert, 2, true);
+            TestOperation(dict.Insert, 7, true);
+            TestOperation(dict.Insert, 3, true);
+            TestOperation(dict.Insert, 13, true);
+            TestOperation(dict.Insert, 4, true);
+            TestOperation(dict.Insert, 14, true);
+            TestOperation(dict.Insert, 999, true);
+            TestOperation(dict.Insert, -3, true);
             TestOperation(dict.Insert, 9, true);
             TestOperation(dict.Insert, 0, true);
             TestOperation(dict.Insert, 5, false);
             TestOperation(dict.Insert, 0, false);
+            
 
             dict.Print();
 
-            TestOperation(dict.Search, 5, true);
+            TestOperation(dict.Search, 8, true);
             TestOperation(dict.Search, -4, false);
             TestOperation(dict.Search, 10, false);
-            TestOperation(dict.Search, 4, false);
+            TestOperation(dict.Search, 4, true);
 
             dict.Print();
 

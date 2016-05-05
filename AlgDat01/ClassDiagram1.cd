@@ -47,18 +47,10 @@
       <FileName>AVLTree.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AlgDat01.BinTree" Collapsed="true">
-    <Position X="5.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAEACACAAAAAAABAgAAAAAAEAAAEAAAAAAAAkAAA=</HashCode>
-      <FileName>BinTree.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="AlgDat01.List" Collapsed="true">
+  <Class Name="AlgDat01.DictList" Collapsed="true">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEACAAAAAAAgAAAAAiAAAAEAAAAAAAAEAAAkAAA=</HashCode>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAiAAAAEAAAAAAAAUAAAkAAA=</HashCode>
       <FileName>List.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -92,6 +84,14 @@
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>List.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgDat01.BinTree" Collapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAACAAAAAAEAABhAgAAAAEAAAAAAAAAAIAkAAA=</HashCode>
+      <FileName>BinTree.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

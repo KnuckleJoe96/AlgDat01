@@ -196,9 +196,9 @@ namespace AlgDat01
 
     public class MultiSetUnsortedArray : Array, MultiSet
     {
-        public override bool Search(int elementent)
+        public override bool Search(int element)
         {
-            return searchUnsorted(elementent);
+            return searchUnsorted(element);
         }
 
         public override bool Insert(int element)
