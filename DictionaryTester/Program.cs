@@ -7,7 +7,7 @@ using AlgDat01;
 namespace DictionaryTester
 {
     //
-    //SAMUEL, hier bitte Skype-Name eintragen: 
+    //SAMUEL, hier bitte Skype-Name eintragen: samuel.mierowski
     //
     class Tester
     {
@@ -16,37 +16,40 @@ namespace DictionaryTester
 
         public static void Main(string[] args)
         {
-            /*BasicTest(new SetSortedArray());
-            FuzzyTest(new SetSortedArray());
+            BasicTest(new SetSortedArray());
             BasicTest(new SetUnsortedArray());
-            FuzzyTest(new SetUnsortedArray());
             BasicTest(new MultiSetArray());
-            FuzzyTest(new MultiSetArray());
             BasicTest(new MultiSetUnsortedArray());
-            FuzzyTest(new MultiSetUnsortedArray());*/
 
-            //BasicTest(new SetSortedLinkedList());
-            //FuzzyTest(new SetSortedLinkedList());
-            //BasicTest(new SetUnsortedLinkedList());
-            //FuzzyTest(new SetUnsortedLinkedList());
-            //BasicTest(new MultiSetSortedLinkedList());
-            //FuzzyTest(new MultiSetSortedLinkedList());
-            //BasicTest(new MultiSetUnsortedLinkedList());
-            //FuzzyTest(new MultiSetUnsortedLinkedList());
+            BasicTest(new SetSortedLinkedList());
+            BasicTest(new SetUnsortedLinkedList());
+            BasicTest(new MultiSetSortedLinkedList());
+            BasicTest(new MultiSetUnsortedLinkedList());
 
             BasicTest(new BinTree());
-            //FuzzyTest(new BinTree());
-            /*BasicTest(new AVLTree());
-            FuzzyTest(new AVLTree());
+            BasicTest(new AVLTree());
 
             BasicTest(new HashTabSepChain());
-            FuzzyTest(new HashTabSepChain());
             BasicTest(new HashTabQuadProb());
-            FuzzyTest(new HashTabQuadProb());*/
 
-            Console.WriteLine("----------------");
+            // temporarily disable console output (many unnecessary writelines causing a slowdown)
+            var stdOut = Console.Out;
+
+            Console.SetOut(System.IO.TextWriter.Null);
+
+            ParallelTest(new MultiSet[]{new MultiSetUnsortedArray(), new MultiSetUnsortedLinkedList()});
+
+            ParallelTest(new Set[]{new HashTabSepChain(), new HashTabQuadProb(), new SetUnsortedArray(), new SetUnsortedLinkedList()});
+
+            ParallelTest(new SortedMultiSet[]{new MultiSetArray(), new MultiSetSortedLinkedList()});
+
+            ParallelTest(new SortedSet[]{new SetSortedArray(), new SetSortedLinkedList(), new BinTree(), new AVLTree()});
+
+            Console.SetOut(stdOut);
+
+            Console.WriteLine("----------------------------");
             Console.WriteLine("{0} from {1} tests failed", failedTestCount, testCount);
-            Console.WriteLine("----------------");
+            Console.WriteLine("----------------------------");
         }
 
         public static void PrintTestHeader(Dictionary dict)
@@ -66,26 +69,70 @@ namespace DictionaryTester
             {
                 failedTestCount++;
 
-                Console.WriteLine("{0}.Insert({1}) returned {2} should be {3}",
+                Console.WriteLine("{0}.{1}({2}) returned {3} should be {4}",
                                   op.Target.GetType().FullName,
+                                  op.GetMethodInfo().Name,
                                   element,
                                   result,
                                   expectedResult);
             }
         }
 
-        public static void FuzzyTest(Dictionary dict)
+        // tests if all dicts return the same result for random operations
+        public static void ParallelTest<T>(T[] dicts) where T : Dictionary
         {
-            DictionaryOperation[] operations = {dict.Search, dict.Insert, dict.Delete,};
+            if (dicts.Length == 0)
+            {
+                return;
+            }
+
+            Console.WriteLine("----- Parallel Testing {0} -----", typeof(T).Name);
+
+            testCount++;
+
+            DictionaryOperation[][] operations = new DictionaryOperation[dicts.Length][];
+
+            for (int i = 0; i < dicts.Length; i++)
+            {
+                operations[i] = new DictionaryOperation[]{dicts[i].Search, dicts[i].Insert, dicts[i].Delete};
+            }
+
+            bool[] results = new bool[dicts.Length];
 
             var rng = new Random();
 
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 10000; i++)
             {
-                var operation = operations[rng.Next(operations.Length)];
+                Console.WriteLine(i);
+
                 int element = rng.Next(1000);
 
-                operation(element);
+                int opIndex = rng.Next(operations[0].Length);
+
+                for (int j = 0; j < dicts.Length; j++)
+                {
+                    var operation = operations[j][opIndex];
+                    
+                    results[j] = operation(element);
+                }
+
+                if (!results.Aggregate((a, b) => a == b))
+                {
+                    Console.WriteLine("ParallelTest failed");
+
+                    foreach (var dict in dicts)
+                    {
+                        Console.WriteLine(dict.GetType().Name);
+                        dict.Print();
+                        Console.WriteLine();
+                    }
+                        
+                    Console.WriteLine("Results: {0}", String.Join(", ", results));
+
+                    failedTestCount++;
+
+                    break;
+                }
             }
         }
 

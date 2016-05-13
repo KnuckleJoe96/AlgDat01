@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AlgDat01 {
-    public class LinkedList {
+    public class LinkedList : IEnumerable<int> {
         public LElem start;
         public LElem end;
 
@@ -14,6 +13,23 @@ namespace AlgDat01 {
         }
 
         public LinkedList() {}
+
+        public IEnumerator<int> GetEnumerator()
+        {
+            var elem = start;
+
+            while (elem != null)
+            {
+                yield return elem.value;
+
+                elem = elem.next;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 
     public class LElem {
@@ -26,7 +42,7 @@ namespace AlgDat01 {
         }
     }
 
-    public abstract class DictList : Dictionary {
+    public abstract class DictList : Dictionary, IEnumerable<int> {
         public LinkedList myList;
 
         public DictList(int Value) {
@@ -35,6 +51,16 @@ namespace AlgDat01 {
 
         public DictList() {
             myList = new LinkedList();
+        }
+
+        public IEnumerator<int> GetEnumerator()
+        {
+            return myList.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         public bool Search(int elem) {
