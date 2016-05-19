@@ -26,7 +26,7 @@ namespace AlgDat01
         protected void adaptSize()
         {
             // prevent adapting the size while rehashing
-            if (elementCount < 0)
+            if (elementCount <= 0)
             {
                 return;
             }
@@ -52,7 +52,12 @@ namespace AlgDat01
                 lowerLimit = tableSize / 4;
                 upperLimit = tableSize - lowerLimit;
 
+                int oldElementCount = elementCount;
+                elementCount = -elementCount;
+
                 rehash();
+
+                elementCount = oldElementCount;
             }
         }
 
@@ -77,10 +82,6 @@ namespace AlgDat01
 
         protected override void rehash()
         {
-            int oldElementCount = elementCount;
-
-            elementCount = -elementCount;
-
             var oldTable = table;
 
             table = Utils.InitializeArray<SetUnsortedLinkedList>(tableSize);
@@ -92,8 +93,6 @@ namespace AlgDat01
                     Insert(element);
                 }
             }
-                
-            elementCount = oldElementCount;
         }
             
         public bool Search(int element)
@@ -106,6 +105,8 @@ namespace AlgDat01
             if (table[hash(element)].Insert(element))
             {
                 elementCount++;
+
+                adaptSize();
 
                 return true;
             }
@@ -120,6 +121,8 @@ namespace AlgDat01
             if (table[hash(element)].Delete(element))
             {
                 elementCount--;
+
+                adaptSize();
 
                 return true;
             }
@@ -179,10 +182,6 @@ namespace AlgDat01
             
         protected override void rehash()
         {
-            int oldElementCount = elementCount;
-
-            elementCount = -elementCount;
-
             var oldTable = table;
 
             table = Utils.InitializeArray<Cell>(tableSize);
@@ -194,8 +193,6 @@ namespace AlgDat01
                     Insert(cell.element);
                 }
             }
-                
-            elementCount = oldElementCount;
         }
 
         public bool Search(int element)
