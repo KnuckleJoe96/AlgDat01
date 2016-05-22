@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace AlgDat01
 {
@@ -8,15 +9,16 @@ namespace AlgDat01
 
         protected int length = 0;
 
+        public Array()
+        {
+            array = new int[1];
+        }
+
         protected void increaseLength()
         {
             length++;
 
-            if (array == null)
-            {
-                array = new int[2]; 
-            }
-            else if (length > array.Length)
+            if (length > array.Length)
             {
                 int[] newArray = new int[array.Length * 2];
 
@@ -176,21 +178,7 @@ namespace AlgDat01
 
         public void Print()
         {
-            Console.Write("{0} : ", this.GetType().Name);
-
-            if (length != 0)
-            {
-                for (int i = 0; i < length; i++)
-                {
-                    Console.Write("{0} ", array[i]);
-                }
-
-                Console.WriteLine();
-            }
-            else
-            {
-                Console.WriteLine("empty");
-            }
+            Console.WriteLine("[{0}]", String.Join(", ", array.Take(length)));
         }
     }
 
