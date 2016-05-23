@@ -1,4 +1,4 @@
-﻿namespace AlgDat01
+﻿namespace Dictionaries
 {
     public class Utils
     {
@@ -22,4 +22,3 @@
         }
     }
 }
-

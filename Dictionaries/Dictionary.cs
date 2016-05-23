@@ -1,4 +1,4 @@
-﻿namespace AlgDat01
+﻿namespace Dictionaries
 {
     public interface Dictionary
     {

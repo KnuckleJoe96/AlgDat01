@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgDat01", "AlgDat01\AlgDat01.csproj", "{5FF9AD0B-57A0-4648-8E4C-6B218EE1ABFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionaries", "Dictionaries\Dictionaries.csproj", "{5FF9AD0B-57A0-4648-8E4C-6B218EE1ABFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryTester", "DictionaryTester\DictionaryTester.csproj", "{8AD665B7-D73A-43A7-8039-B4482920BC37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryInteractor", "DictionaryInteractor\DictionaryInteractor.csproj", "{9A5B8D2D-30F1-47B2-B273-61CE4A3D069A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8AD665B7-D73A-43A7-8039-B4482920BC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AD665B7-D73A-43A7-8039-B4482920BC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AD665B7-D73A-43A7-8039-B4482920BC37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5B8D2D-30F1-47B2-B273-61CE4A3D069A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5B8D2D-30F1-47B2-B273-61CE4A3D069A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5B8D2D-30F1-47B2-B273-61CE4A3D069A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5B8D2D-30F1-47B2-B273-61CE4A3D069A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

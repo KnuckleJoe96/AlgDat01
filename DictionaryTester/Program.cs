@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using AlgDat01;
+using Dictionaries;
 
 namespace DictionaryTester
 {
@@ -32,11 +32,6 @@ namespace DictionaryTester
             BasicTest(new HashTabSepChain());
             BasicTest(new HashTabQuadProb());
 
-            // temporarily disable console output (many unnecessary writelines causing a slowdown)
-            var stdOut = Console.Out;
-
-            Console.SetOut(System.IO.TextWriter.Null);
-
             ParallelTest(new MultiSet[]{new MultiSetUnsortedArray(), new MultiSetUnsortedLinkedList()});
 
             ParallelTest(new Set[]{new HashTabSepChain(), new HashTabQuadProb(), new SetUnsortedArray(), new SetUnsortedLinkedList()});
@@ -45,8 +40,7 @@ namespace DictionaryTester
 
             ParallelTest(new SortedSet[]{new SetSortedArray(), new SetSortedLinkedList(), new BinTree(), new AVLTree()});
 
-            Console.SetOut(stdOut);
-
+            Console.WriteLine();
             Console.WriteLine("----------------------------");
             Console.WriteLine("{0} from {1} tests failed", failedTestCount, testCount);
             Console.WriteLine("----------------------------");
@@ -103,8 +97,6 @@ namespace DictionaryTester
 
             for (int i = 0; i < 10000; i++)
             {
-                Console.WriteLine(i);
-
                 int element = rng.Next(1000);
 
                 int opIndex = rng.Next(operations[0].Length);

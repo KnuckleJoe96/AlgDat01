@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8AD665B7-D73A-43A7-8039-B4482920BC37}</ProjectGuid>
+    <ProjectGuid>{9A5B8D2D-30F1-47B2-B273-61CE4A3D069A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>DictionaryTester</RootNamespace>
-    <AssemblyName>DictionaryTester</AssemblyName>
+    <RootNamespace>DictionaryInteractor</RootNamespace>
+    <AssemblyName>DictionaryInteractor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

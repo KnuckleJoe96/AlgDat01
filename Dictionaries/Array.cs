@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AlgDat01
+namespace Dictionaries
 {
     public abstract class Array : Dictionary
     {

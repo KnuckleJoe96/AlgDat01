@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AlgDat01 {
+namespace Dictionaries {
     public class LinkedList : IEnumerable<int> {
         public LElem start;
         public LElem end;
@@ -65,11 +65,9 @@ namespace AlgDat01 {
 
         public bool Search(int elem) {
             if (ReturnSearch(elem) != null) {
-                Console.WriteLine("Item found!");
                 return true;
             }
-
-            Console.WriteLine("Item not found!");
+                
             return false;
         }
         public abstract bool Insert(int elem);
@@ -79,7 +77,6 @@ namespace AlgDat01 {
 
                 //1. Case: leere Liste
                 if (item == null) {
-                    Console.WriteLine("Delete failed.");
                     return false;
                 }
 
@@ -90,7 +87,6 @@ namespace AlgDat01 {
                     item.prev = null;
                     item.next = null;
 
-                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
@@ -99,7 +95,6 @@ namespace AlgDat01 {
                     myList.start = null;
                     myList.end = null;
 
-                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
@@ -109,7 +104,6 @@ namespace AlgDat01 {
                     myList.start.prev.next = null;
                     myList.start.prev = null;
 
-                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
@@ -119,31 +113,20 @@ namespace AlgDat01 {
                     myList.end.next.prev = null;
                     myList.end.next = null;
 
-                    Console.WriteLine("Delete successful.");
                     return true;
                 }
 
             }
 
-            Console.WriteLine("Delete failed.");
             return false;
         }
         public void Print() {
-            Console.WriteLine("\nPrint: ");
-
             if (myList.start != null) {
-                LElem temp = myList.start;
-
-                while (temp != null) {
-                    Console.Write(temp.value + " ");
-
-                    temp = temp.next;
-                }
+                Console.WriteLine("[{0}]", String.Join(" -> ", this));
             }
             else {
-                Console.WriteLine("Not successful!");
+                Console.WriteLine("empty");
             }
-            Console.WriteLine("\n");
         }
 
         public LElem ReturnSearch(int elem) {
@@ -210,23 +193,19 @@ namespace AlgDat01 {
             if (myList.start != null) {
                 if (temp != null) {
                     if (temp.value != newElem.value) {
-                        Console.WriteLine("Insert successful.");
                         return InsertHelper(temp, newElem);
                     }
                 }
                 else {
-                    Console.WriteLine("Insert successful.");
                     return InsertHelper(temp, newElem);
                 }
             }
             else {
                 myList.start = new LElem(elem);
                 myList.end = myList.start;
-                Console.WriteLine("Insert successful (new List).");
                 return true;
             }
 
-            Console.WriteLine("Insert failed.");
             return false;
         }
     }
@@ -244,18 +223,15 @@ namespace AlgDat01 {
                     newElem.prev = myList.end;
                     myList.end = newElem;
 
-                    Console.WriteLine("Insert successful.");
                     return true;
                 }                
             }
             else {
                 myList.start = new LElem(elem);
                 myList.end = myList.start;
-                Console.WriteLine("Insert successful (new List).");
                 return true;
             }
 
-            Console.WriteLine("Insert failed.");
             return false;//-----------------
         }
     }
@@ -268,13 +244,11 @@ namespace AlgDat01 {
                 LElem temp = PositionFinder(elem);
                 LElem newElem = new LElem(elem);
 
-                Console.WriteLine("Insert successful.");
                 return InsertHelper(temp, newElem);
             }
             else {
                 myList.start = new LElem(elem);
                 myList.end = myList.start;
-                Console.WriteLine("Insert successful (new List).");
                 return true;
             }
         }
@@ -292,14 +266,12 @@ namespace AlgDat01 {
                 newElem.prev = myList.end;
                 myList.end = newElem;
 
-                Console.WriteLine("Insert successful.");
                 return true;
             }
             else {
                 myList.start = new LElem(elem);
                 myList.end = myList.start;
 
-                Console.WriteLine("Insert successful (new List).");
                 return true;
             }            
         }

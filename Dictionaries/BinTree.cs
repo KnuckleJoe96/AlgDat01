@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgDat01 {
+namespace Dictionaries {
   public class BinTreeNode {
     public int value;
     public BinTreeNode left;
@@ -75,7 +75,6 @@ namespace AlgDat01 {
           }
         }
       }
-      Console.WriteLine("Delete failed!");
 
       return false;
     }
@@ -91,7 +90,6 @@ namespace AlgDat01 {
       else {
         root = null;
       }
-      Console.WriteLine("Delete successful!");
     }
 
     // Löschen mit 1 KindElement
@@ -120,7 +118,6 @@ namespace AlgDat01 {
           foundElement.right = null;
         }
       }
-      Console.WriteLine("Delete successful!");
     }
 
     // Löschen mit 2 KindElementen
@@ -144,7 +141,6 @@ namespace AlgDat01 {
 
         root.value = symPredecessor;
       }
-      Console.WriteLine("Delete successful!");
     }
 
     // Einfügen von neuen KindElementen mit Ausgabe ob es Erfolgreich war
@@ -162,18 +158,15 @@ namespace AlgDat01 {
           else
             fatherNode.right = new BinTreeNode(Value);
 
-          Console.WriteLine("Insert successful!");
           return true;
         }
         else {
           root = new BinTreeNode(Value);
 
-          Console.WriteLine("Insert successful!");
           return true;
         }
       }
       else {
-        Console.WriteLine("Insert failed!");
 
         return false;
       }
@@ -184,11 +177,9 @@ namespace AlgDat01 {
     public bool Search(int Value) {
       BinTreeNode notImportant; //Not good looking
       if (ReturnSearch(Value, out notImportant) != null) {
-        Console.WriteLine("Item found.");
         return true;
       }
 
-      Console.WriteLine("Item not found.");
       return false;
     }
 
@@ -236,32 +227,28 @@ namespace AlgDat01 {
 
     // Aufruf der Printfunktion und Rückmeldung falls Baum leeer ist
     public void Print() {
-      Console.WriteLine("\nPrint: ");
-      int depth = 0;
       if (root != null)
-        InOrderReversed(root, ref depth);
+        InOrderReversed(root);
       else
-        Console.WriteLine("Print failed.");
-      Console.WriteLine();
+         Console.WriteLine("empty");
     }
 
 
     // Rekursive Funktion zur Ausgabe des Binärbaumes in gedrehter Form
-    void InOrderReversed(BinTreeNode temp, ref int depth) {
+    void InOrderReversed(BinTreeNode temp, int depth = 0) {
+      
+      depth++;
+      
       if (temp.right != null) {
-        depth++;
-        InOrderReversed(temp.right, ref depth);
+        InOrderReversed(temp.right, depth);
       }
 
       for (int i = 0; i < depth; i++) { Console.Write("- "); }
       Console.WriteLine(temp.value + " ");
 
       if (temp.left != null) {
-        depth++;
-        InOrderReversed(temp.left, ref depth);
+        InOrderReversed(temp.left, depth);
       }
-
-      depth--;
     }
 
     BinTreeNode findSymmetricalPredecessor(BinTreeNode e) {

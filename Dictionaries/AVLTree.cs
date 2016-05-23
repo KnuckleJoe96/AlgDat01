@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgDat01 {
+namespace Dictionaries {
     public class AVLTree : BinTree {
     }
 }
