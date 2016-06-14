@@ -5,6 +5,5 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dictionaries {
-    public class AVLTree : BinTree {
-    }
+ 
 }

@@ -18,19 +18,34 @@ namespace Dictionaries {
 
     }
 
-    enum balanceFactor { MinusMinus = -2, Minus = -1, Null = 0, Plus = 1, PlusPlus = 2 }
+    public enum balanceFactor { MinusMinus = -2, Minus = -1, Null = 0, Plus = 1, PlusPlus = 2 }
 
     /// <summary>
     /// AVLTREE
     /// </summary>
     public class AVLTreeNode : BinTreeNode {
-        balanceFactor balance;
-        int depth;
+        public new AVLTreeNode left;
+        public new AVLTreeNode right;
+        public new AVLTreeNode father;
+        public balanceFactor balance;
+        public int depthLeft;
+        public int depthRight;
 
-        public AVLTreeNode(int Value) : base(Value) { }
+        public AVLTreeNode(int Value) : base(Value) {
+            depthLeft = 0;
+            depthRight = 0;
+            balance = 0;
+        }
 
         public void calculateBalance() {
-            balance = (balanceFactor)(((AVLTreeNode)left).depth - ((AVLTreeNode)right).depth);
+            if ((AVLTreeNode)left != null && ((AVLTreeNode)right) != null)
+                balance = (balanceFactor)(depthLeft- depthRight);
+            else if ((AVLTreeNode)left != null)
+                balance = (balanceFactor)(depthLeft);
+            else if ((AVLTreeNode)right != null)
+                balance = (balanceFactor)(depthRight);
+            else
+                balance = 0;
         }
     }
 
@@ -38,12 +53,11 @@ namespace Dictionaries {
     //------------------------------------------------------------------------------------------------
     //
 
-
     /// <summary>
     /// BINTREE
     /// </summary>
     public class BinTree : SortedSet {
-        BinTreeNode root;
+        public BinTreeNode root;
 
         public BinTree(int Value) {
             root.value = Value;
@@ -51,7 +65,7 @@ namespace Dictionaries {
 
         public BinTree() { }
 
-        public bool Delete(int Value) {
+        public virtual bool Delete(int Value) {
             if (root != null) {
                 BinTreeNode fatherNode;
                 BinTreeNode foundElement = ReturnSearch(Value, out fatherNode);
@@ -167,35 +181,45 @@ namespace Dictionaries {
         }
 
         // Einfügen von neuen KindElementen mit Ausgabe ob es Erfolgreich war
-        public bool Insert(int Value) {
+        public virtual bool Insert(int Value) {
+            if (ReturnInsert(Value) != null) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public BinTreeNode ReturnInsert(int Value) {
             BinTreeNode fatherNode;
             BinTreeNode foundElement = ReturnSearch(Value, out fatherNode);
 
             if (foundElement == null) {
 
-                if (root != null) {
+                BinTreeNode newNode = new BinTreeNode(Value);
 
+                if (root != null) {
+                  
                     if (Value < fatherNode.value) {
-                        fatherNode.left = new BinTreeNode(Value);
+                        fatherNode.left = newNode;
                         fatherNode.left.father = fatherNode;
                     }
 
                     else {
-                        fatherNode.right = new BinTreeNode(Value);
+                        fatherNode.right = newNode;
                         fatherNode.right.father = fatherNode;
                     }
 
-                    return true;
+                    return newNode;
                 }
                 else {
-                    root = new BinTreeNode(Value);
+                    root = newNode;
 
-                    return true;
+                    return newNode;
                 }
             }
             else {
 
-                return false;
+                return null;
             }
         }
 
@@ -250,7 +274,6 @@ namespace Dictionaries {
             return null;
         }
 
-
         // Aufruf der Printfunktion und Rückmeldung falls Baum leeer ist
         public void Print() {
             if (root != null)
@@ -258,7 +281,6 @@ namespace Dictionaries {
             else
                 Console.WriteLine("empty");
         }
-
 
         // Rekursive Funktion zur Ausgabe des Binärbaumes in gedrehter Form
         void InOrderReversed(BinTreeNode temp, int depth = 0) {
@@ -331,7 +353,7 @@ namespace Dictionaries {
             BinTreeNode node = ReturnSearch(value, out father);
             BinTreeNode fatherFather = father.father;
 
-            //Vaterknoten darf nicht null sein & node muss rechtes Kind für RechtsRot sein. 
+            //Vaterknoten darf nicht null sein & node muss rechtes Kind für LinksRot sein. 
             if (father != null) {
                 if (node == father.right) {
 
@@ -356,5 +378,86 @@ namespace Dictionaries {
                 }
             }
         }
-    }   
+    }
+
+    public class AVLTree : BinTree {
+        new AVLTreeNode root;
+
+        public AVLTree() { }
+
+        public AVLTree(int Value) {
+            root.value = Value;
+        }
+
+        public override bool Insert(int value) {
+            AVLTreeNode insertedN = (AVLTreeNode)ReturnInsert(value);
+
+            if (insertedN != null) {
+                if (insertedN == root) {
+                    //1. Fall: Vaterknoten war kein Blatt --> kein Ausgleich nötig, Balance(Vater) ist jetzt 0
+                    if (insertedN.father.right != null && insertedN.father.left != null)
+                        insertedN.father.calculateBalance();
+
+                    //2. Fall: Vater war Blatt, links eingefügt --> Tiefe && Balance aktualisieren
+                    else {
+                        if (insertedN.father.left != null)
+                            insertedN.father.depthLeft++;
+                        else
+                            insertedN.father.depthRight++;
+
+                        recalculateDepth(root);
+                    }
+                    return true;
+                }
+                return true;
+            }
+            return false;
+        }
+        public int recalculateDepth(AVLTreeNode node) {
+
+            if (node.left != null)
+                node.depthLeft = recalculateDepth(node.left) + 1;
+
+            if (node.right != null)
+                node.depthRight = recalculateDepth(node.right) + 1;
+
+            if (node.left == null && node.right == null) {
+                node.depthLeft = 0;
+                node.depthRight = 0;
+
+                return 0;
+            }
+
+            node.calculateBalance();
+            return node.depthLeft > node.depthRight ? node.depthLeft : node.depthRight;
+        }
+
+        public void rotateType(AVLTreeNode node) {
+            //6 Fälle: ++ & Vater+ | ++ & Vater- | -- & Vater+ | -- & Vater- | ++ & Vater0 | -- & Vater0
+            if (node.balance == balanceFactor.MinusMinus) {
+                if (node.left.balance == balanceFactor.Plus) {
+                    rotateLeft(node.left.right.value);
+                    rotateRight(node.left.value);
+                }
+                else if (node.left.balance == balanceFactor.Minus) {
+                    rotateRight(node.left.value);
+                }
+                else {
+                    //--
+                }
+            }
+            else {
+                if (node.right.balance == balanceFactor.Plus) {
+                    rotateRight(node.right.left.value);
+                    rotateLeft(node.right.value);
+                }
+                else if (node.right.balance == balanceFactor.Minus) {
+                    rotateLeft(node.right.value);
+                }
+                else {
+                    //--
+                }
+            }
+        }
+    }
 }
