@@ -5,59 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dictionaries {
-    public class BinTreeNode {
-        public int value;
-        public BinTreeNode left;
-        public BinTreeNode right;
-        public BinTreeNode father;
-
-        public BinTreeNode(int Value) {
-            value = Value;
-        }
-
-
-    }
-
-    public enum balanceFactor { MinusMinus = -2, Minus = -1, Null = 0, Plus = 1, PlusPlus = 2 }
-
-    /// <summary>
-    /// AVLTREE
-    /// </summary>
-    public class AVLTreeNode : BinTreeNode {
-        public new AVLTreeNode left;
-        public new AVLTreeNode right;
-        public new AVLTreeNode father;
-        public balanceFactor balance;
-        public int depthLeft;
-        public int depthRight;
-
-        public AVLTreeNode(int Value) : base(Value) {
-            depthLeft = 0;
-            depthRight = 0;
-            balance = 0;
-        }
-
-        public void calculateBalance() {
-            if ((AVLTreeNode)left != null && ((AVLTreeNode)right) != null)
-                balance = (balanceFactor)(depthLeft- depthRight);
-            else if ((AVLTreeNode)left != null)
-                balance = (balanceFactor)(depthLeft);
-            else if ((AVLTreeNode)right != null)
-                balance = (balanceFactor)(depthRight);
-            else
-                balance = 0;
-        }
-    }
-
-    //
-    //------------------------------------------------------------------------------------------------
-    //
-
-    /// <summary>
-    /// BINTREE
-    /// </summary>
     public class BinTree : SortedSet {
         public BinTreeNode root;
+
+        public class BinTreeNode {
+            public int value;
+            public BinTreeNode left;
+            public BinTreeNode right;
+            public BinTreeNode father;
+
+            public BinTreeNode(int Value) {
+                value = Value;
+            }
+        }
 
         public BinTree(int Value) {
             root.value = Value;
@@ -327,16 +287,16 @@ namespace Dictionaries {
             if (father != null) {
                 if (node == father.left) {
 
-                    if (father != root) { //Unterscheidung: Vaterknoten = root?                  
+                    if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
                         if (fatherFather.left == father) fatherFather.left = node;
                         else fatherFather.right = node;
-                    } 
+                    }
                     else { //Father == root
-                        root = node;                        
+                        root = node;
                     }
 
                     //Rechtes Kind vorhanden?
-                    if(node.right == null) {
+                    if (node.right == null) {
                         father.left = null;
                     }
                     else {
@@ -357,7 +317,7 @@ namespace Dictionaries {
             if (father != null) {
                 if (node == father.right) {
 
-                    if (father != root) { //Unterscheidung: Vaterknoten = root?                  
+                    if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
                         if (fatherFather.left == father) fatherFather.left = node;
                         else fatherFather.right = node;
                     }
@@ -378,86 +338,5 @@ namespace Dictionaries {
                 }
             }
         }
-    }
-
-    public class AVLTree : BinTree {
-        new AVLTreeNode root;
-
-        public AVLTree() { }
-
-        public AVLTree(int Value) {
-            root.value = Value;
-        }
-
-        public override bool Insert(int value) {
-            AVLTreeNode insertedN = (AVLTreeNode)ReturnInsert(value);
-
-            if (insertedN != null) {
-                if (insertedN == root) {
-                    //1. Fall: Vaterknoten war kein Blatt --> kein Ausgleich nötig, Balance(Vater) ist jetzt 0
-                    if (insertedN.father.right != null && insertedN.father.left != null)
-                        insertedN.father.calculateBalance();
-
-                    //2. Fall: Vater war Blatt, links eingefügt --> Tiefe && Balance aktualisieren
-                    else {
-                        if (insertedN.father.left != null)
-                            insertedN.father.depthLeft++;
-                        else
-                            insertedN.father.depthRight++;
-
-                        recalculateDepth(root);
-                    }
-                    return true;
-                }
-                return true;
-            }
-            return false;
-        }
-        public int recalculateDepth(AVLTreeNode node) {
-
-            if (node.left != null)
-                node.depthLeft = recalculateDepth(node.left) + 1;
-
-            if (node.right != null)
-                node.depthRight = recalculateDepth(node.right) + 1;
-
-            if (node.left == null && node.right == null) {
-                node.depthLeft = 0;
-                node.depthRight = 0;
-
-                return 0;
-            }
-
-            node.calculateBalance();
-            return node.depthLeft > node.depthRight ? node.depthLeft : node.depthRight;
-        }
-
-        public void rotateType(AVLTreeNode node) {
-            //6 Fälle: ++ & Vater+ | ++ & Vater- | -- & Vater+ | -- & Vater- | ++ & Vater0 | -- & Vater0
-            if (node.balance == balanceFactor.MinusMinus) {
-                if (node.left.balance == balanceFactor.Plus) {
-                    rotateLeft(node.left.right.value);
-                    rotateRight(node.left.value);
-                }
-                else if (node.left.balance == balanceFactor.Minus) {
-                    rotateRight(node.left.value);
-                }
-                else {
-                    //--
-                }
-            }
-            else {
-                if (node.right.balance == balanceFactor.Plus) {
-                    rotateRight(node.right.left.value);
-                    rotateLeft(node.right.value);
-                }
-                else if (node.right.balance == balanceFactor.Minus) {
-                    rotateLeft(node.right.value);
-                }
-                else {
-                    //--
-                }
-            }
-        }
-    }
+    }    
 }
