@@ -55,7 +55,7 @@ namespace Dictionaries {
             AVLTreeNode insertedN = (AVLTreeNode)ReturnInsert(value);
 
             if (insertedN != null) {
-                if (insertedN == root) {
+                if (insertedN != root) {
                     //1. Fall: Vaterknoten war kein Blatt --> kein Ausgleich nötig, Balance(Vater) ist jetzt 0
                     if (insertedN.father.right != null && insertedN.father.left != null)
                         calculateBalance(insertedN.father);

@@ -240,6 +240,8 @@ namespace Dictionaries {
                 InOrderReversed(root);
             else
                 Console.WriteLine("empty");
+
+            Console.WriteLine();
         }
 
         // Rekursive Funktion zur Ausgabe des Binärbaumes in gedrehter Form
@@ -290,6 +292,8 @@ namespace Dictionaries {
                     if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
                         if (fatherFather.left == father) fatherFather.left = node;
                         else fatherFather.right = node;
+
+                        node.father = fatherFather;
                     }
                     else { //Father == root
                         root = node;
@@ -303,6 +307,7 @@ namespace Dictionaries {
                         father.left = node.right;
                     }
 
+                    father.father = node;
                     node.right = father;
                 }
             }
@@ -320,6 +325,8 @@ namespace Dictionaries {
                     if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
                         if (fatherFather.left == father) fatherFather.left = node;
                         else fatherFather.right = node;
+
+                        node.father = fatherFather;
                     }
                     else { //Father == root
                         root = node;
@@ -333,6 +340,7 @@ namespace Dictionaries {
                         father.right = node.left;
                     }
 
+                    father.father = node;
                     node.left = father;
 
                 }
