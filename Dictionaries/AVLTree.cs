@@ -9,8 +9,7 @@ namespace Dictionaries {
 
     
 
-    public class AVLTree : BinTree {
-
+    public class AVLTree : BinTree {            
         public class AVLTreeNode : Node {
             public balanceFactor balance;
             public int depthLeft;
@@ -59,17 +58,17 @@ namespace Dictionaries {
             AVLTreeNode insertedN = ReturnInsert(value);
 
             if (insertedN != null) {
-                if (insertedN != root) {
+                if (insertedN.value != ((AVLTreeNode)root).value) {
                     //1. Fall: Vaterknoten war kein Blatt --> kein Ausgleich nötig, Balance(Vater) ist jetzt 0
                     if (insertedN.father.right != null && insertedN.father.left != null)
-                        calculateBalance(insertedN.father);
+                        calculateBalance((AVLTreeNode)insertedN.father);
 
                     //2. Fall: Vater war Blatt, links eingefügt --> Tiefe && Balance aktualisieren
                     else {
                         if (insertedN.father.left != null)
-                            insertedN.father.depthLeft++;
+                            ((AVLTreeNode)insertedN.father).depthLeft++;
                         else
-                            insertedN.father.depthRight++;
+                            ((AVLTreeNode)insertedN.father).depthRight++;
 
                         recalculateDepth((AVLTreeNode)root);
                     }
@@ -79,13 +78,14 @@ namespace Dictionaries {
             }
             return false;
         }
+
         public int recalculateDepth(AVLTreeNode node) {
 
             if (node.left != null)
-                node.depthLeft = recalculateDepth(node.left) + 1;
+                node.depthLeft = recalculateDepth((AVLTreeNode)node.left) + 1;
 
             if (node.right != null)
-                node.depthRight = recalculateDepth(node.right) + 1;
+                node.depthRight = recalculateDepth((AVLTreeNode)node.right) + 1;
 
             if (node.left == null && node.right == null) {
                 node.depthLeft = 0;
@@ -99,22 +99,22 @@ namespace Dictionaries {
         }
 
         public void compensate(AVLTreeNode node) {
-            //6 Fälle: ++ & Vater+ | ++ & Vater- | -- & Vater+ | -- & Vater-
+            //4 Fälle: ++ & Vater+ | ++ & Vater- | -- & Vater+ | -- & Vater-
             if (node.balance == balanceFactor.MinusMinus) {
-                if (node.left.balance == balanceFactor.Plus) {
+                if (((AVLTreeNode)node.left).balance == balanceFactor.Plus) { ///------------NOCHMAL ÜBERPRÜFEN: VATER??
                     rotateLeft(node.left.right.value);
                     rotateRight(node.left.value);
                 }
-                else if (node.left.balance == balanceFactor.Minus) {
+                else if (((AVLTreeNode)node.left).balance == balanceFactor.Minus) {
                     rotateRight(node.left.value);
                 }
             }
             else {
-                if (node.right.balance == balanceFactor.Plus) {
+                if (((AVLTreeNode)node.right).balance == balanceFactor.Plus) {
                     rotateRight(node.right.left.value);
                     rotateLeft(node.right.value);
                 }
-                else if (node.right.balance == balanceFactor.Minus) {
+                else if (((AVLTreeNode)node.right).balance == balanceFactor.Minus) {
                     rotateLeft(node.right.value);
                 }
             }
