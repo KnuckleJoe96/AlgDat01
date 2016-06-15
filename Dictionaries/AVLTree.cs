@@ -11,10 +11,7 @@ namespace Dictionaries {
 
     public class AVLTree : BinTree {
 
-        public class AVLTreeNode : BinTreeNode {
-            public new AVLTreeNode left;
-            public new AVLTreeNode right;
-            public new AVLTreeNode father;
+        public class AVLTreeNode : Node {
             public balanceFactor balance;
             public int depthLeft;
             public int depthRight;
@@ -25,7 +22,14 @@ namespace Dictionaries {
                 balance = 0;
             }
 
+            public static implicit operator AVLTreeNode(BinTreeNode node) {
+                AVLTreeNode returnNode = new AVLTreeNode(node.value);
+                if (node.left != null) returnNode.left = node.left;
+                if (node.right != null) returnNode.right = node.right;
+                if (node.father != null) returnNode.father = node.father;
 
+                return returnNode;
+            }
         }
 
         public AVLTree() { }
@@ -52,7 +56,7 @@ namespace Dictionaries {
         }
 
         public override bool Insert(int value) {
-            AVLTreeNode insertedN = (AVLTreeNode)ReturnInsert(value);
+            AVLTreeNode insertedN = ReturnInsert(value);
 
             if (insertedN != null) {
                 if (insertedN != root) {

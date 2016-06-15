@@ -4,19 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+public abstract class Node {
+    public Node father;
+    public Node left;
+    public Node right;
+
+    public int value;
+
+    public Node(int Value) {
+        value = Value;
+    }
+}
+
 namespace Dictionaries {
     public class BinTree : SortedSet {
         public BinTreeNode root;
 
-        public class BinTreeNode {
-            public int value;
-            public BinTreeNode left;
-            public BinTreeNode right;
-            public BinTreeNode father;
-
-            public BinTreeNode(int Value) {
-                value = Value;
+        public class BinTreeNode : Node {    
+            public BinTreeNode(int Value) : base(Value) {
             }
+
         }
 
         public BinTree(int Value) {
@@ -106,12 +113,12 @@ namespace Dictionaries {
             }
             else {
                 if (isChildLeft) {
-                    root = root.left;
+                    root = (BinTreeNode)root.left;
                     root.left.father = null;
                     foundElement.left = null;
                 }
                 else {
-                    root = root.right;
+                    root = (BinTreeNode)root.right;
                     root.right.father = null;
                     foundElement.right = null;
                 }
@@ -215,7 +222,7 @@ namespace Dictionaries {
 
                         if (temp.left != null)
 
-                            temp = temp.left;
+                            temp = (BinTreeNode)temp.left;
 
                         else
                             return null;
@@ -224,7 +231,7 @@ namespace Dictionaries {
                         fatherNode = temp;
 
                         if (temp.right != null)
-                            temp = temp.right;
+                            temp = (BinTreeNode)temp.right;
 
                         else
                             return null;
@@ -250,22 +257,22 @@ namespace Dictionaries {
             depth++;
 
             if (temp.right != null) {
-                InOrderReversed(temp.right, depth);
+                InOrderReversed((BinTreeNode)temp.right, depth);
             }
 
             for (int i = 0; i < depth; i++) { Console.Write("- "); }
             Console.WriteLine(temp.value + " ");
 
             if (temp.left != null) {
-                InOrderReversed(temp.left, depth);
+                InOrderReversed((BinTreeNode)temp.left, depth);
             }
         }
 
         BinTreeNode findSymmetricalPredecessor(BinTreeNode e) {
-            BinTreeNode temp = e.left;
+            BinTreeNode temp = (BinTreeNode)e.left;
 
             while (temp.right != null) {
-                temp = temp.right;
+                temp = (BinTreeNode)temp.right;
             }
             return temp;
         }
@@ -283,7 +290,7 @@ namespace Dictionaries {
         public void rotateRight(int value) {
             BinTreeNode father;
             BinTreeNode node = ReturnSearch(value, out father);
-            BinTreeNode fatherFather = father.father;
+            BinTreeNode fatherFather = (BinTreeNode)father.father;
 
             //Vaterknoten darf nicht null sein & node muss linkes Kind für RechtsRot sein. 
             if (father != null) {
@@ -316,7 +323,7 @@ namespace Dictionaries {
         public void rotateLeft(int value) {
             BinTreeNode father;
             BinTreeNode node = ReturnSearch(value, out father);
-            BinTreeNode fatherFather = father.father;
+            BinTreeNode fatherFather = (BinTreeNode)father.father;
 
             //Vaterknoten darf nicht null sein & node muss rechtes Kind für LinksRot sein. 
             if (father != null) {
