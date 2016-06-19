@@ -197,7 +197,7 @@ namespace Dictionaries {
         }
 
         // Test zum Suchen ob ein Element vorhanden ist
-        public bool Search(int Value) {
+        public virtual bool Search(int Value) {
             BinTreeNode unimportant; 
             if (ReturnSearch(Value, out unimportant) != null) {
                 return true;

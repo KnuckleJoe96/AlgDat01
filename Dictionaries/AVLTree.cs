@@ -123,6 +123,15 @@ namespace Dictionaries {
             recalculateDepth(root);
         }
 
+        public override bool Search(int Value) {
+            AVLTreeNode unimportant;
+            if (ReturnSearch(Value, out unimportant) != null) {
+                return true;
+            }
+
+            return false;
+        }
+
         public AVLTreeNode ReturnSearch(int Value, out AVLTreeNode fatherNode) {
             AVLTreeNode temp = root;
             fatherNode = temp;
@@ -197,7 +206,6 @@ namespace Dictionaries {
             }
         }
 
-
         public void rotateRight(int value) {
             AVLTreeNode father;
             AVLTreeNode node = ReturnSearch(value, out father);
@@ -266,7 +274,7 @@ namespace Dictionaries {
         }
 
         // Aufruf der Printfunktion und Rückmeldung falls Baum leeer ist
-        public new void Print() {
+        public override void Print() {
             if (root != null)
                 InOrderReversed(root);
             else
@@ -290,6 +298,140 @@ namespace Dictionaries {
             if (temp.left != null) {
                 InOrderReversed(temp.left, depth);
             }
+        }
+
+        public override bool Delete(int Value) {
+            if (root != null) {
+                AVLTreeNode fatherNode;
+                AVLTreeNode foundElement = ReturnSearch(Value, out fatherNode);
+                bool isChildLeft = false;
+
+                if (foundElement != null) {
+                    if (fatherNode != null)
+                        isChildLeft = ((fatherNode.left != null) && (fatherNode.left == foundElement));
+
+                    int amountChildren = checkForChildren(foundElement);
+
+                    //Gefundenes Element hat keine KindElemente
+                    if (amountChildren == 0) {
+                        deleteWith0Children(foundElement, fatherNode, isChildLeft);
+
+                        return true;
+                    }
+
+                    //Gefundenes Element hat 1 KindElement
+                    if (amountChildren == 1) {
+                        deleteWith1Child(foundElement, fatherNode, isChildLeft);
+
+                        return true;
+                    }
+
+                    //Gefundenes Element hat 2 KinderElement
+                    if (amountChildren == 2) {
+                        deleteWith2Children(foundElement, fatherNode, isChildLeft);
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        // Löschen mit 0 KindElementen
+        void deleteWith0Children(AVLTreeNode foundElement, AVLTreeNode fatherNode, bool isChildLeft) {
+            if (fatherNode != null) {
+                if (isChildLeft) {
+                    fatherNode.left.father = null;
+                    fatherNode.left = null;
+                }
+                else {
+                    fatherNode.right.father = null;
+                    fatherNode.right = null;
+                }
+            }
+            else {
+                root = null;
+            }
+        }
+
+        // Löschen mit 1 KindElement
+        void deleteWith1Child(AVLTreeNode foundElement, AVLTreeNode fatherNode, bool isChildLeft) {
+            if (fatherNode != null) {
+                if (isChildLeft) {
+                    if (foundElement.left != null) {
+                        foundElement.left.father = fatherNode;
+                        fatherNode.left = foundElement.left;
+                    }
+                    else {
+                        foundElement.right.father = fatherNode;
+                        fatherNode.left = foundElement.right;
+                    }
+                }
+                else {
+                    if (foundElement.left != null) {
+                        foundElement.left.father = fatherNode;
+                        fatherNode.right = foundElement.left;
+                    }
+                    else {
+                        foundElement.right.father = fatherNode;
+                        fatherNode.right = foundElement.right;
+                    }
+                }
+            }
+            else {
+                if (isChildLeft) {
+                    root = root.left;
+                    root.left.father = null;
+                    foundElement.left = null;
+                }
+                else {
+                    root = root.right;
+                    root.right.father = null;
+                    foundElement.right = null;
+                }
+            }
+        }
+
+        // Löschen mit 2 KindElementen
+        void deleteWith2Children(AVLTreeNode foundElement, AVLTreeNode fatherNode, bool isChildLeft) {
+            if (fatherNode != null) {
+                int symPredecessor = findSymmetricalPredecessor(foundElement).value;
+
+                Delete(symPredecessor);
+
+                if (isChildLeft)
+                    fatherNode.left.value = symPredecessor;
+
+                else
+                    fatherNode.right.value = symPredecessor;
+            }
+            else {
+                int symPredecessor = findSymmetricalPredecessor(foundElement).value;
+
+                Delete(symPredecessor);
+
+                root.value = symPredecessor;
+            }
+        }
+
+        AVLTreeNode findSymmetricalPredecessor(AVLTreeNode e) {
+            AVLTreeNode temp = e.left;
+
+            while (temp.right != null) {
+                temp = temp.right;
+            }
+            return temp;
+        }
+
+        int checkForChildren(AVLTreeNode e) {
+            if (e.left != null && e.right != null)
+                return 2;
+
+            if (e.left != null || e.right != null)
+                return 1;
+
+            return 0;
         }
     }
 }
