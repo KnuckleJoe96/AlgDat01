@@ -38,12 +38,13 @@ namespace Dictionaries {
         }
 
         public void calculateBalance(AVLTreeNode node) {
+			// Normalfall: Linke minus Rechte Tiefe
             if (node.left != null && node.right != null) {
-                node.balance = (balanceFactor)(node.depthLeft - node.depthRight);
+                node.balance = (balanceFactor)(node.depthLeft - node.depthRight); // falsch rum
                 if (node.balance == balanceFactor.MinusMinus || node.balance == balanceFactor.PlusPlus) compensate(node);
             }
             else if (node.left != null) {
-                node.balance = (balanceFactor)(node.depthLeft);
+                node.balance = (balanceFactor)(node.depthLeft); // mal minus 1
                 if (node.balance == balanceFactor.MinusMinus) compensate(node);
             }
             else if (node.right != null) {
@@ -58,7 +59,7 @@ namespace Dictionaries {
             AVLTreeNode insertedN = ReturnInsert(value);
 
             if (insertedN != null) {
-                if (insertedN.value != ((AVLTreeNode)root).value) {
+                if (insertedN.value != ((AVLTreeNode)root).value) { // es war nicht die Wurzel die wir eingefügt haben
                     //1. Fall: Vaterknoten war kein Blatt --> kein Ausgleich nötig, Balance(Vater) ist jetzt 0
                     if (insertedN.father.right != null && insertedN.father.left != null)
                         calculateBalance((AVLTreeNode)insertedN.father);

@@ -40,7 +40,7 @@ namespace Dictionaries {
 
                 if (foundElement != null) {
                     if (fatherNode != null)
-                        isChildLeft = ((fatherNode.left != null) && (fatherNode.left == foundElement));
+                        isChildLeft = ((fatherNode.left != null) && (fatherNode.left == foundElement)); // kann man sich das null sparen?
 
                     int amountChildren = checkForChildren(foundElement);
 
@@ -91,9 +91,9 @@ namespace Dictionaries {
         void deleteWith1Child(BinTreeNode foundElement, BinTreeNode fatherNode, bool isChildLeft) {
             if (fatherNode != null) {
                 if (isChildLeft) {
-                    if (foundElement.left != null) {
-                        foundElement.left.father = fatherNode;
-                        fatherNode.left = foundElement.left;
+                    if (foundElement.left != null) { // haben wir selbst noch ein linkes Kind?
+                        foundElement.left.father = fatherNode; // bisherigen "Großvater" jetzt zum Vater machen
+                        fatherNode.left = foundElement.left; // bei Großvater jetzt den Enkel als Kind machen
                     }
                     else {
                         foundElement.right.father = fatherNode;
@@ -112,7 +112,7 @@ namespace Dictionaries {
                 }
             }
             else {
-                if (isChildLeft) {
+                if (isChildLeft) { // Wenn wir doch die Wurzel sind, warum sollten wir dann das linke Kind sein???
                     root = (BinTreeNode)root.left;
                     root.left.father = null;
                     foundElement.left = null;
@@ -139,9 +139,9 @@ namespace Dictionaries {
                     fatherNode.right.value = symPredecessor;
             }
             else {
-                int symPredecessor = findSymmetricalPredecessor(foundElement).value;
+                int symPredecessor = findSymmetricalPredecessor(foundElement).value; // Die zeilen könnte man auch vor das if/else Konstrukt tun
 
-                Delete(symPredecessor);
+                Delete(symPredecessor); // ebenso
 
                 root.value = symPredecessor;
             }
@@ -160,13 +160,13 @@ namespace Dictionaries {
             BinTreeNode fatherNode;
             BinTreeNode foundElement = ReturnSearch(Value, out fatherNode);
 
-            if (foundElement == null) {
+            if (foundElement == null) { // wert ist noch nicht im baum
 
                 BinTreeNode newNode = new BinTreeNode(Value);
 
                 if (root != null) {
                   
-                    if (Value < fatherNode.value) {
+                    if (Value < fatherNode.value) { // wenn kleiner dann links anfügen
                         fatherNode.left = newNode;
                         fatherNode.left.father = fatherNode;
                     }
@@ -204,11 +204,11 @@ namespace Dictionaries {
         public BinTreeNode ReturnSearch(int Value, out BinTreeNode fatherNode) {
             BinTreeNode temp = root;
             fatherNode = temp;
-            bool found = false;
+            bool found = false; // found wird nie true :o
 
-            if (temp != null) {
+            if (temp != null) { // Wenn Wurzel nicht leer ist
 
-                if (root.value == Value) {
+                if (root.value == Value) { // gesuchter wert ist die wurzel
                     fatherNode = null;
                     return root;
                 }
@@ -238,7 +238,7 @@ namespace Dictionaries {
                     }
                 }
             }
-            return null;
+            return null; // Es gibt gar keinen Baum
         }
 
         // Aufruf der Printfunktion und Rückmeldung falls Baum leeer ist
@@ -256,11 +256,12 @@ namespace Dictionaries {
 
             depth++;
 
+			// Wenn es rechten Teilbaum gibt -> gehe in rechten Teilbaum
             if (temp.right != null) {
                 InOrderReversed((BinTreeNode)temp.right, depth);
             }
 
-            for (int i = 0; i < depth; i++) { Console.Write("- "); }
+            for (int i = 0; i < depth; i++) { Console.Write("- "); } // für jeden Tiefe ein strichle
             Console.WriteLine(temp.value + " ");
 
             if (temp.left != null) {
@@ -268,7 +269,7 @@ namespace Dictionaries {
             }
         }
 
-        BinTreeNode findSymmetricalPredecessor(BinTreeNode e) {
+        BinTreeNode findSymmetricalPredecessor(BinTreeNode e) { // Die größte Zahl im linken Teilbaum
             BinTreeNode temp = (BinTreeNode)e.left;
 
             while (temp.right != null) {
@@ -298,12 +299,12 @@ namespace Dictionaries {
 
                     if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
                         if (fatherFather.left == father) fatherFather.left = node;
-                        else fatherFather.right = node;
+                        else fatherFather.right = node; // ich werde rechts an Großvater gehängt
 
-                        node.father = fatherFather;
+                        node.father = fatherFather; // bisheriger Großvater wird mein Vater
                     }
                     else { //Father == root
-                        root = node;
+                        root = node; // wenn mein vater keinen vater hat werde ich die neue Wurzel
                     }
 
                     //Rechtes Kind vorhanden?
@@ -311,11 +312,11 @@ namespace Dictionaries {
                         father.left = null;
                     }
                     else {
-                        father.left = node.right;
+                        father.left = node.right; // mein bisheriger rechter Teilbaum wird links an Vater gehängt
                     }
 
-                    father.father = node;
-                    node.right = father;
+                    father.father = node; // ich werde jetzt vater von meinem bisherigen vater
+                    node.right = father; // und mein vater wird mein rechter nachfolger
                 }
             }
         }
