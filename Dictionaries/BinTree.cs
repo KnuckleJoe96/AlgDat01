@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public abstract class Node {
+/*public abstract class Node {
     public Node father;
     public Node left;
     public Node right;
@@ -14,14 +14,20 @@ public abstract class Node {
     public Node(int Value) {
         value = Value;
     }
-}
+}*/
 
 namespace Dictionaries {
     public class BinTree : SortedSet {
         public BinTreeNode root;
 
-        public class BinTreeNode : Node {    
-            public BinTreeNode(int Value) : base(Value) {
+        public class BinTreeNode /*: Node*/ {
+            public BinTreeNode father;
+            public BinTreeNode left;
+            public BinTreeNode right;
+
+            public int value;
+            public BinTreeNode(int Value) /*: base(Value)*/ {
+                value = Value;
             }
 
         }
@@ -242,7 +248,7 @@ namespace Dictionaries {
         }
 
         // Aufruf der Printfunktion und Rückmeldung falls Baum leeer ist
-        public void Print() {
+        public virtual void Print() {
             if (root != null)
                 InOrderReversed(root);
             else
@@ -287,71 +293,71 @@ namespace Dictionaries {
             return 0;
         }
 
-        public void rotateRight(int value) {
-            BinTreeNode father;
-            BinTreeNode node = ReturnSearch(value, out father);
-            BinTreeNode fatherFather = (BinTreeNode)father.father;
+        //public void rotateRight(int value) {
+        //    BinTreeNode father;
+        //    BinTreeNode node = ReturnSearch(value, out father);
+        //    BinTreeNode fatherFather = (BinTreeNode)father.father;
 
-            //Vaterknoten darf nicht null sein & node muss linkes Kind für RechtsRot sein. 
-            if (father != null) {
-                if (node == father.left) {
+        //    //Vaterknoten darf nicht null sein & node muss linkes Kind für RechtsRot sein. 
+        //    if (father != null) {
+        //        if (node == father.left) {
 
-                    if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
-                        if (fatherFather.left == father) fatherFather.left = node;
-                        else fatherFather.right = node;
+        //            if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
+        //                if (fatherFather.left == father) fatherFather.left = node;
+        //                else fatherFather.right = node;
 
-                        node.father = fatherFather;
-                    }
-                    else { //Father == root
-                        root = node;
-                    }
+        //                node.father = fatherFather;
+        //            }
+        //            else { //Father == root
+        //                root = node;
+        //            }
 
-                    //Rechtes Kind vorhanden?
-                    if (node.right == null) {
-                        father.left = null;
-                    }
-                    else {
-                        father.left = node.right;
-                    }
+        //            //Rechtes Kind vorhanden?
+        //            if (node.right == null) {
+        //                father.left = null;
+        //            }
+        //            else {
+        //                father.left = node.right;
+        //            }
 
-                    father.father = node;
-                    node.right = father;
-                }
-            }
-        }
+        //            father.father = node;
+        //            node.right = father;
+        //        }
+        //    }
+        //}
 
-        public void rotateLeft(int value) {
-            BinTreeNode father;
-            BinTreeNode node = ReturnSearch(value, out father);
-            BinTreeNode fatherFather = (BinTreeNode)father.father;
+        //public void rotateLeft(int value) {
+        //    AVLTreeNode father;
+        //    BinTreeNode node = ReturnSearch(value, out father);
+        //    BinTreeNode fatherFather = (BinTreeNode)father.father;
 
-            //Vaterknoten darf nicht null sein & node muss rechtes Kind für LinksRot sein. 
-            if (father != null) {
-                if (node == father.right) {
+        //    //Vaterknoten darf nicht null sein & node muss rechtes Kind für LinksRot sein. 
+        //    if (father != null) {
+        //        if (node == father.right) {
 
-                    if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
-                        if (fatherFather.left == father) fatherFather.left = node;
-                        else fatherFather.right = node;
+        //            if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
+        //                if (fatherFather.left == father) fatherFather.left = node;
+        //                else fatherFather.right = node;
 
-                        node.father = fatherFather;
-                    }
-                    else { //Father == root
-                        root = node;
-                    }
+        //                node.father = fatherFather;
+        //            }
+        //            else { //Father == root
+        //                root = node;
+        //            }
 
-                    //Linkes Kind vorhanden?
-                    if (node.left == null) {
-                        father.right = null;
-                    }
-                    else {
-                        father.right = node.left;
-                    }
+        //            //Linkes Kind vorhanden?
+        //            if (node.left == null) {
+        //                father.right = null;
+        //            }
+        //            else {
+        //                father.right = node.left;
+        //            }
 
-                    father.father = node;
-                    node.left = father;
+        //            father.father = node;
+        //            node.left = father;
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
     }    
 }
