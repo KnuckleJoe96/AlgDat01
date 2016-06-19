@@ -65,12 +65,14 @@ namespace Dictionaries {
                     //2. Fall: Vater war Blatt, links eingefügt --> Tiefe && Balance aktualisieren
                     else {
                         if (insertedN.father.left != null)
-                            ((AVLTreeNode)insertedN.father).depthLeft++;
+                            (insertedN.father).depthLeft++;
                         else
-                            ((AVLTreeNode)insertedN.father).depthRight++;
+                            (insertedN.father).depthRight++;
 
-                        recalculateDepth((AVLTreeNode)root);
+                        Print();
+                        recalculateDepth(root);                        
                     }
+                    Print();
                     return true;
                 }
                 return true;
@@ -88,13 +90,6 @@ namespace Dictionaries {
                 node.depthRight = recalculateDepth(node.right) + 1;
             else node.depthRight = 0;
 
-            if (node.left == null && node.right == null) {
-                node.depthLeft = 0;
-                node.depthRight = 0;
-
-                return 0;
-            }
-
             calculateBalance(node);
             return node.depthLeft > node.depthRight ? node.depthLeft : node.depthRight;
         }
@@ -103,23 +98,24 @@ namespace Dictionaries {
             //4 Fälle: ++ & Kind+ -> L-Rot | ++ & Kind- -> R-L-Rot | -- & Kind+ -> L-R-Rot | -- & Kind- R-Rot
             if (node.balance == balanceFactor.MinusMinus) {
                 if ((node.left).balance == balanceFactor.Plus) { 
-                    rotateLeft(node.left.right.value);
-                    rotateRight(node.left.value);
+                    rotateLeft(node.left.right);
+                    rotateRight(node.left);
                 }
                 else if ((node.left).balance == balanceFactor.Minus) {
-                    rotateRight(node.left.value);
+                    rotateRight(node.left);
                 }
             }
             else {
                 if ((node.right).balance == balanceFactor.Plus) {
-                    rotateLeft(node.right.value);                    
+                    rotateLeft(node.right);                    
                 }
                 else if ((node.right).balance == balanceFactor.Minus) {
-                    rotateRight(node.right.left.value);
-                    rotateLeft(node.right.value);
+                    rotateRight(node.right.left);
+                    rotateLeft(node.right);
                 }
             }
 
+            Print();
             recalculateDepth(root);
         }
 
@@ -206,23 +202,25 @@ namespace Dictionaries {
             }
         }
 
-        public void rotateRight(int value) {
-            AVLTreeNode father;
-            AVLTreeNode node = ReturnSearch(value, out father);
-            AVLTreeNode fatherFather = father.father;
-
+        public void rotateRight(AVLTreeNode node) {
             //Vaterknoten darf nicht null sein & node muss linkes Kind für RechtsRot sein. 
-            if (father != null) {
+            if (node.father != null) {
+                AVLTreeNode father = node.father;
+                //AVLTreeNode node = ReturnSearch(value, out father);
+                AVLTreeNode fatherFather = father.father;
+
                 if (node == father.left) {
 
                     if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
                         if (fatherFather.left == father) fatherFather.left = node;
                         else fatherFather.right = node;
 
-                        node.father = fatherFather;
+                        node.father = fatherFather;                        
                     }
                     else { //Father == root
+                        root.father = node;
                         root = node;
+                        node.father = null;
                     }
 
                     //Rechtes Kind vorhanden?
@@ -239,13 +237,13 @@ namespace Dictionaries {
             }
         }
 
-        public void rotateLeft(int value) {
-            AVLTreeNode father;
-            AVLTreeNode node = ReturnSearch(value, out father);
-            AVLTreeNode fatherFather = father.father;
-
+        public void rotateLeft(AVLTreeNode node) {
             //Vaterknoten darf nicht null sein & node muss rechtes Kind für LinksRot sein. 
-            if (father != null) {
+            if (node.father != null) {
+                AVLTreeNode father = node.father;
+                //AVLTreeNode node = ReturnSearch(value, out father);
+                AVLTreeNode fatherFather = father.father;
+
                 if (node == father.right) {
 
                     if (fatherFather != null) { //Unterscheidung: Vaterknoten = root?                  
@@ -255,7 +253,9 @@ namespace Dictionaries {
                         node.father = fatherFather;
                     }
                     else { //Father == root
+                        root.father = node;
                         root = node;
+                        node.father = null;
                     }
 
                     //Linkes Kind vorhanden?

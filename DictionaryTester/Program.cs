@@ -95,7 +95,7 @@ namespace DictionaryTester
 
             var rng = new Random();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 30; i++)
             {
                 int element = rng.Next(1000);
 
@@ -104,7 +104,7 @@ namespace DictionaryTester
                 for (int j = 0; j < dicts.Length; j++)
                 {
                     var operation = operations[j][opIndex];
-                    
+                    Console.WriteLine(operation.Method + " - "+ element);
                     results[j] = operation(element);
                 }
 
@@ -241,21 +241,29 @@ namespace DictionaryTester
 
             dict.Print();
 
-            TestOperation(dict.Insert, 5, true);
-            TestOperation(dict.Insert, 8, true);
-            TestOperation(dict.Insert, 2, true);
-            TestOperation(dict.Insert, 7, true);
-            TestOperation(dict.Insert, 3, true);
-            TestOperation(dict.Insert, 13, true);
-            TestOperation(dict.Insert, 4, true);
-            TestOperation(dict.Insert, 14, true);
-            TestOperation(dict.Insert, 999, true);
-            TestOperation(dict.Insert, -3, true);
-            TestOperation(dict.Insert, 9, true);
-            TestOperation(dict.Insert, 0, true);
-            TestOperation(dict.Insert, 5, false);
-            TestOperation(dict.Insert, 0, false);
-            
+            //TestOperation(dict.Insert, 5, true);
+            //TestOperation(dict.Insert, 8, true);
+            //TestOperation(dict.Insert, 2, true);
+            //TestOperation(dict.Insert, 7, true);
+            //TestOperation(dict.Insert, 3, true);
+            //TestOperation(dict.Insert, 13, true);
+            //TestOperation(dict.Insert, 4, true);
+            //TestOperation(dict.Insert, 14, true);
+            //TestOperation(dict.Insert, 999, true);
+            //TestOperation(dict.Insert, -3, true);
+            //TestOperation(dict.Insert, 9, true);
+            //TestOperation(dict.Insert, 0, true);
+            //TestOperation(dict.Insert, 5, false);
+            //TestOperation(dict.Insert, 0, false);
+            TestOperation(dict.Insert, 493, true);
+            TestOperation(dict.Insert, 42, true);
+            TestOperation(dict.Insert, 711, true);
+            TestOperation(dict.Insert, 320, true);
+            TestOperation(dict.Insert, 620, true);
+            TestOperation(dict.Insert, 775, true);
+            TestOperation(dict.Insert, 625, true);
+            TestOperation(dict.Insert, 260, true);
+
 
             dict.Print();
 
