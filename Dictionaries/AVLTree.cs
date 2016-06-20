@@ -12,22 +12,43 @@ namespace Dictionaries {
     public class AVLTree : BinTree {
         public new AVLTreeNode root;
             
-        public class AVLTreeNode /*: Node*/ {
+        public class AVLTreeNode {
             public AVLTreeNode father;
             public AVLTreeNode left;
             public AVLTreeNode right;
             public balanceFactor balance;
-            public int depthLeft;
-            public int depthRight;
 
             public int value;
 
-            public AVLTreeNode(int Value) /*: base(Value)*/ {
+            public AVLTreeNode(int Value) {
                 value = Value;
-                depthLeft = 0;
-                depthRight = 0;
-                balance = 0;
+                balance = 0;                
             }
+
+            public int depthLeft() {
+                if (left != null) return left.depth() + 1;
+                return 0;
+            }
+
+            public int depthRight() {
+                if(right!=null) return right.depth() + 1;
+                return 0;
+            }
+
+            public int depth() {
+                int mydl = 0;
+                int mydr = 0;
+
+                if (left != null)
+                    mydl = left.depthLeft() + 1;
+                else mydl = 0;
+
+                if (right != null)
+                    mydr = right.depthRight() + 1;
+                else mydr = 0;
+
+                return mydl > mydr ? mydl : mydr;
+            }         
         }
 
         public AVLTree() {}
@@ -38,15 +59,15 @@ namespace Dictionaries {
 
         public void calculateBalance(AVLTreeNode node) {
             if (node.left != null && node.right != null) {
-                node.balance = (balanceFactor)(node.depthRight - node.depthLeft);
+                node.balance = (balanceFactor)(node.depthRight() - node.depthLeft());
                 if (node.balance == balanceFactor.MinusMinus || node.balance == balanceFactor.PlusPlus) compensate(node);
             }
             else if (node.left != null) {
-                node.balance = (balanceFactor)(-node.depthLeft);
+                node.balance = (balanceFactor)(-node.depthLeft());
                 if (node.balance == balanceFactor.MinusMinus) compensate(node);
             }
             else if (node.right != null) {
-                node.balance = (balanceFactor)(node.depthRight);
+                node.balance = (balanceFactor)(node.depthRight());
                 if (node.balance == balanceFactor.PlusPlus) compensate(node);
             }
             else
@@ -57,20 +78,14 @@ namespace Dictionaries {
             AVLTreeNode insertedN = ReturnInsert(value);
 
             if (insertedN != null) {
-                if (insertedN.value != ((AVLTreeNode)root).value) {
+                if (insertedN.value != (root).value) {
                     //1. Fall: Vaterknoten war kein Blatt --> kein Ausgleich nötig, Balance(Vater) ist jetzt 0
                     if (insertedN.father.right != null && insertedN.father.left != null)
-                        calculateBalance((AVLTreeNode)insertedN.father);
+                        calculateBalance(insertedN.father);
 
                     //2. Fall: Vater war Blatt, links eingefügt --> Tiefe && Balance aktualisieren
                     else {
-                        if (insertedN.father.left != null)
-                            (insertedN.father).depthLeft++;
-                        else
-                            (insertedN.father).depthRight++;
-
-                        Print();
-                        recalculateDepth(root);                        
+                        calculateAllBalances(root);  
                     }
                     Print();
                     return true;
@@ -80,18 +95,10 @@ namespace Dictionaries {
             return false;
         }
 
-        public int recalculateDepth(AVLTreeNode node) {
-
-            if (node.left != null)
-                node.depthLeft = recalculateDepth(node.left) + 1;
-            else node.depthLeft = 0;
-
-            if (node.right != null)
-                node.depthRight = recalculateDepth(node.right) + 1;
-            else node.depthRight = 0;
-
+        public void calculateAllBalances(AVLTreeNode node) {
+            if (node.left != null) calculateAllBalances(node.left);
+            if (node.right != null) calculateAllBalances(node.right);
             calculateBalance(node);
-            return node.depthLeft > node.depthRight ? node.depthLeft : node.depthRight;
         }
 
         public void compensate(AVLTreeNode node) {
@@ -116,7 +123,7 @@ namespace Dictionaries {
             }
 
             Print();
-            recalculateDepth(root);
+            calculateAllBalances(root);
         }
 
         public override bool Search(int Value) {
